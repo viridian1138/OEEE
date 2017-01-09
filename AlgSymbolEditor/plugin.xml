@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="Algebra Symbol Editor"
+            extensions="algsymbol"
+            icon="icons/sample.gif"
+            contributorClass="algsymboleditor.editors.SymbolEditorContributor"
+            class="algsymboleditor.editors.SymbolEditor"
+            id="algsymboleditor.editors.SymbolEditor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="Algebra Quotient Editor"
+            extensions="algquotient"
+            icon="icons/sample.gif"
+            contributorClass="algsymboleditor.editors.QuotientEditorContributor"
+            class="algsymboleditor.editors.QuotientEditor"
+            id="algsymboleditor.editors.QuotientEditor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="Algebra Symbol Wizard"
+            id="Algebra Symbol Editor">
+      </category>
+      <wizard
+            name="Algebra Symbol"
+            icon="icons/sample.gif"
+            category="Algebra Symbol Editor"
+            class="algsymboleditor.wizards.NewSymbolWizard"
+            id="algsymboleditor.wizards.NewSymbolWizard">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="Algebra Quotient Wizard"
+            id="Algebra Quotient Editor">
+      </category>
+      <wizard
+            name="Algebra Quotient"
+            icon="icons/sample.gif"
+            category="Algebra Quotient Editor"
+            class="algsymboleditor.wizards.NewQuotientWizard"
+            id="algsymboleditor.wizards.NewQuotientWizard">
+      </wizard>
+   </extension>
+
+</plugin>
