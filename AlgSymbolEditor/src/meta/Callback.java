@@ -90,9 +90,16 @@ package meta;
  * @author Thorn Green
  */
 public class Callback<T extends Meta> extends Object {
+	/**
+	 * Constructs the callback.
+	 * @param in The callback parameter.
+	 */
     public void callback(T in) {
         throwEx();
     };
+    /**
+     * Throws an UndefinedOperation exception.
+     */
     void throwEx() { throw( new Meta.UndefinedOperation() );
     }
 };

@@ -43,10 +43,16 @@ import java.util.Vector;
  */
 public class EncoderObjectOutput implements ObjectOutput {
     
+	/**
+	 * Constructs the encoder.
+	 */
     public EncoderObjectOutput() {
     }
     
-    protected final Vector objs = new Vector();
+    /**
+     * Vector used to store the results of the encoding.
+     */
+    protected final Vector<Object> objs = new Vector<Object>();
     
     @Override
     public void writeObject(Object arg0) throws IOException {
@@ -54,12 +60,21 @@ public class EncoderObjectOutput implements ObjectOutput {
         
     }
     
+    /**
+     * Encodes an Externalizable into a set of objects.
+     * @param in The Externalizable to be encoded.
+     * @return The result of the encoding.
+     * @throws IOException
+     */
     public Object[] encodeObjects(Externalizable in) throws IOException {
         objs.add(in.getClass().getName());
         in.writeExternal(this);
         return (objs.toArray());
     }
     
+    /**
+     * Throws an UndefinedOperation exception.
+     */
     protected void throwEx() {
         throw ( new Meta.UndefinedOperation() );
     }

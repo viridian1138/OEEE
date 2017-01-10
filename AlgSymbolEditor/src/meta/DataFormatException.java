@@ -73,25 +73,45 @@ import java.io.PrintWriter;
  * @author Thorn Green
  */
 public class DataFormatException extends IOException implements PrimitiveThrowHandler {
+	
+	/**
+	 * The wrapped Throwable.
+	 */
     Throwable wrap = null;
     
+    /**
+     * Constructs the exception.
+     * @param e The wrapped Throwable.
+     */
     public DataFormatException(Throwable e) {
         super();
         wrap = e;
     }
     
+    /**
+     * Constructs the exception.
+     */
     public DataFormatException() {
         super();
     }
     
+    /**
+     * Constructs the exception.
+     * @param str The exception message.
+     */
     public DataFormatException(String str) {
         super(str);
     }
     
+    /**
+     * Gets the wrapped Throwable.
+     * @return The wrapped Throwable.
+     */
     public Throwable getWrap() {
         return (wrap);
     }
     
+    @Override
     public void printStackTrace(PrintWriter out) {
         super.printStackTrace(out);
         if (wrap != null) {
@@ -101,6 +121,7 @@ public class DataFormatException extends IOException implements PrimitiveThrowHa
         }
     }
     
+    @Override
     public void printStackTrace(PrintStream out) {
         super.printStackTrace(out);
         if (wrap != null) {
@@ -110,13 +131,12 @@ public class DataFormatException extends IOException implements PrimitiveThrowHa
         }
     }
     
+    @Override
     public void printStackTrace() {
         printStackTrace(System.out);
     }
     
-    /**
-     * Supports primitive exception handling capability.
-     */
+    @Override
     public Object[] handleThrow(Throwable in) {
         Object[] ret =
         {

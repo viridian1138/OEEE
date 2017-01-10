@@ -289,7 +289,7 @@ public class QuotientEditorCanvas extends JPanel implements Scrollable {
 			@Override
 			String handleInsert( String in , DefaultInsert def )
 			{
-				return( "<mi>" + in + "</mi>" );
+				return( DefaultInsert.IDENT_INSERT_MODE.handleInsert(in) );
 			}
 		},
 		
@@ -301,7 +301,7 @@ public class QuotientEditorCanvas extends JPanel implements Scrollable {
 			@Override
 			String handleInsert( String in , DefaultInsert def )
 			{
-				return( "<mo>" + in + "</mo>" );
+				return( DefaultInsert.OPERATOR_INSERT_MODE.handleInsert(in) );
 			}
 		},
 		
@@ -313,7 +313,7 @@ public class QuotientEditorCanvas extends JPanel implements Scrollable {
 			@Override
 			String handleInsert( String in , DefaultInsert def )
 			{
-				return( "<mn>" + in + "</mn>" );
+				return( DefaultInsert.NUMBER_INSERT_MODE.handleInsert(in) );
 			}
 		};
 		

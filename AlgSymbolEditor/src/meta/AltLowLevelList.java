@@ -102,15 +102,11 @@ public abstract class AltLowLevelList<U extends AltLowLevelList, T extends Meta>
      */
     public int getCopyMode() { throw( new UndefinedOperation() );
     };
-    /**
-     * Sets the CopyInfoMode for this node.
-     */
+    @Override
     public void setCopyInfoMode(int copy) {
         this.copyInfoMode = copy;
     };
-    /**
-     * Gets the CopyInfoMode for this node.
-     */
+    @Override
     public int getCopyInfoMode() {
         return (this.copyInfoMode);
     };
@@ -124,9 +120,7 @@ public abstract class AltLowLevelList<U extends AltLowLevelList, T extends Meta>
         super();
         this.iAltHigh();
     };
-    /**
-     * Disposes the structure according to the current EraseMode.
-     */
+    @Override
     public void dispose() {
         this.eraseDat();
     };
@@ -159,6 +153,10 @@ public abstract class AltLowLevelList<U extends AltLowLevelList, T extends Meta>
         out.writeObject(myv);
     }
     
+    /**
+     * Handles the construction of myRec.
+     * @return The object for myRec.
+     */
     protected abstract T construct();
     
     /**

@@ -47,6 +47,11 @@ import java.lang.reflect.Constructor;
  */
 public class ExFac {
     
+	/**
+	 * Decodes an object into an Externalizable.
+	 * @param _in The object to be decoded.
+	 * @return The decoded Externalizable.
+	 */
     public static Object create(Object _in) {
         Externalizable ret = null;
         try {
@@ -59,16 +64,33 @@ public class ExFac {
         return ret;
     }
     
+    /**
+     * Creates an XML decoder.
+     * @param is The input stream from which to decode.
+     * @param loader The class loader from which to decode.
+     * @return The decoder.
+     */
     public static XMLDecoder createXMLDecoder(
             InputStream is,
             ClassLoader loader) {
         return (new XMLDecoder(is, loader));
     }
     
+    /**
+     * Creates an XML decoder.
+     * @param is The input stream from which to decode.
+     * @return The decoder.
+     */
     public static XMLDecoder createXMLDecoder(InputStream is) {
         return (createXMLDecoder(is, Meta.getDefaultClassLoader()));
     }
     
+    /**
+     * Creates an XML encoder.
+     * @param os The output stream onto which to encode.
+     * @param cl The class loader from which to encode.
+     * @return The encoder.
+     */
     public static XMLEncoder createXMLEncoder(
             OutputStream os,
             ClassLoader cl) {
@@ -85,6 +107,11 @@ public class ExFac {
         return ((XMLEncoder) ob);
     }
     
+    /**
+     * Creates an XML encoder.
+     * @param os The output stream onto which to encode.
+     * @return The encoder.
+     */
     public static XMLEncoder createXMLEncoder(OutputStream os) {
         return (createXMLEncoder(os, Meta.getDefaultClassLoader()));
     }

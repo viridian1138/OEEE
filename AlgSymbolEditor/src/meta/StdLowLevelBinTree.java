@@ -90,32 +90,22 @@ public class StdLowLevelBinTree<T extends Meta> extends LowLevelBinTree<StdLowLe
     public T getNode() {
         return (this.data);
     };
-    /**
-     * Sets the object stored in the node.
-     */
+    @Override
     public void setNode(T input) {
         this.data = input;
     };
-    /**
-     * Sets the CopyMode for the node.
-     */
+    @Override
     public void setCopyMode(int copy) {
         this.thisCopyMode = copy;
     };
-    /**
-     * Gets the CopyMode for the node.
-     */
+    @Override
     public int getCopyMode() {
         return (this.thisCopyMode);
     };
-    /**
-     * Sets the CopyInfoMode for the node.
-     */
+    @Override
     public void setCopyInfoMode(int copy) { throw( new UndefinedOperation() );
     };
-    /**
-     * Gets the CopyInfoMode for the node.
-     */
+    @Override
     public int getCopyInfoMode() { throw( new UndefinedOperation() );
     };
     
@@ -136,9 +126,7 @@ public class StdLowLevelBinTree<T extends Meta> extends LowLevelBinTree<StdLowLe
         super();
         this.iStdLow();
     };
-    /**
-     * Erases the node according to the current delete mode.
-     */
+    @Override
     public void dispose() {
         this.eraseDat();
     };

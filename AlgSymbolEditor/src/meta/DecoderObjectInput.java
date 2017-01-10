@@ -43,10 +43,20 @@ import java.io.ObjectInput;
  */
 public class DecoderObjectInput implements ObjectInput {
     
+	/**
+	 * The current index of the decoding.
+	 */
     protected int index = 0;
     
+    /**
+     * The set of objects to be decoded.
+     */
     protected Object[] readObjs = null;
     
+    /**
+     * Constructs the decoder.
+     * @param _readObjs The set of objects to be decoded.
+     */
     public DecoderObjectInput(Object[] _readObjs) {
         readObjs = _readObjs;
     }
@@ -57,6 +67,14 @@ public class DecoderObjectInput implements ObjectInput {
         return (readObjs[index]);
     }
     
+    /**
+     * Decodes the contents of readObjs into an Externalizable.
+     * @return The decoded Externalizable.
+     * @throws ClassNotFoundException
+     * @throws IOException
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     */
     public Externalizable decodeObjects()
     throws
             ClassNotFoundException,
@@ -70,6 +88,9 @@ public class DecoderObjectInput implements ObjectInput {
         return (ret);
     }
     
+    /**
+     * Throws an UndefinedOperation exception.
+     */
     protected void throwEx() {
         throw (new Meta.UndefinedOperation() );
     }

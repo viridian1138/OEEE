@@ -38,6 +38,13 @@ package meta;
  */
 public class VersionBufferNode extends Meta<VersionBufferNode> {
     
+	/**
+	 * Constructs the node.
+	 * @param callId The unique ID for the calling VersionBuffer.
+	 * @param user The user (caller) selected name for the node.
+	 * @param hash The hash key for storing the node.
+	 * @param val The object value stored by the node.
+	 */
     public VersionBufferNode(
             int callId,
             String user,
@@ -49,29 +56,62 @@ public class VersionBufferNode extends Meta<VersionBufferNode> {
         value = val;
     }
     
+    /**
+     * Gets the object value stored by the node.
+     * @return The object value stored by the node.
+     */
     public Object getValue() {
         return (value);
     }
     
+    /**
+     * Gets the unique ID for the calling VersionBuffer.
+     * @return The unique ID for the calling VersionBuffer.
+     */
     public int getCallerId() {
         return (callerId);
     }
     
+    /**
+     * Gets the user (caller) selected name for the node.
+     * @return The user (caller) selected name for the node.
+     */
     public String getUserKey() {
         return (userKey);
     }
     
+    /**
+     * Gets the hash key for storing the node.
+     * @return The hash key for storing the node.
+     */
     public String getHashKey() {
         return (hashKey);
     }
     
+    @Override
     public void wake() {
     };
     
+    /**
+     * The hash key for storing the node.
+     */
     private String hashKey;
+    
+    /**
+     * The user (caller) selected name for the node.
+     */
     private String userKey;
+    
+    /**
+     * The object value stored by the node.
+     */
     private Object value;
+    
+    /**
+     * The unique ID for the calling VersionBuffer.
+     */
     private int callerId;
+    
 }
 
 

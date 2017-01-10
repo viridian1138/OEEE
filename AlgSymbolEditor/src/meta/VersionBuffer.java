@@ -119,10 +119,25 @@ import java.util.Hashtable;
  * @author Thorn Green
  */
 public class VersionBuffer extends Object implements Externalizable {
-    private static Hashtable myTable = new Hashtable();
+	
+	/**
+	 * The item table initialized after reading from persistence.
+	 */
+    private static Hashtable<String,Object> myTable = new Hashtable<String,Object>();
+    
+    /**
+     * Current ID from which to create unique IDs for VersionBuffers.
+     */
     private static int unqID = 5;
     
+    /**
+     * Constant indicating the buffer was created to write to persistence.
+     */
     public final static boolean WRITE = true;
+    
+    /**
+     * Constant indicating the buffer was created to read from persistence.
+     */
     public final static boolean READ = false;
     
     /**
@@ -348,6 +363,11 @@ public class VersionBuffer extends Object implements Externalizable {
         /* System.out.println( "End Read External" ); */
     }
     
+    /**
+     * Generates the hash key for a particular user (caller) selected name.
+     * @param userKey The user (caller) selected name.
+     * @return The generated hash key.
+     */
     private final String getHashKey(String userKey) {
         return (idStr + userKey);
     }
@@ -377,10 +397,18 @@ public class VersionBuffer extends Object implements Externalizable {
         }
     }
     
-    public static Hashtable getMyTable() {
+    /**
+     * Returns the item table initialized after reading from persistence.
+     * @return The item table initialized after reading from persistence.
+     */
+    public static Hashtable<String,Object> getMyTable() {
         return( myTable );
     }
     
+    /**
+     * Gets the key string for the unique ID of the VersionBuffer.
+     * @return The key string for the unique ID of the VersionBuffer.
+     */
     public String getIdStr() {
         return( idStr );
     }
@@ -392,7 +420,19 @@ public class VersionBuffer extends Object implements Externalizable {
         handleRemove();
     }
     
+    /**
+     * List of nodes when writing the VersionBuffer to storage.
+     */
     private HighLevelList myList = null;
+    
+    /**
+     * Key string for the unique ID of the VersionBuffer.
+     */
     public String idStr = null;
+    
+    /**
+     * The unique ID for the VersionBuffer.
+     */
     private int myId = 0;
 }
+

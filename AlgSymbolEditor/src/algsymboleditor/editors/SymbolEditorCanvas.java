@@ -67,6 +67,7 @@ import org.kie.internal.io.ResourceFactory;
 import org.kie.internal.runtime.StatefulKnowledgeSession;
 import org.mvel2.optimizers.OptimizerFactory;
 
+import algsymboleditor.editors.QuotientEditorCanvas.DefaultInsert;
 import simplealgebra.DoubleElem;
 import simplealgebra.symbolic.DroolsSession;
 import meta.*;
@@ -378,7 +379,7 @@ public class SymbolEditorCanvas extends JPanel implements Scrollable {
 			@Override
 			String handleInsert( String in , DefaultInsert def )
 			{
-				return( "<mi>" + in + "</mi>" );
+				return( DefaultInsert.IDENT_INSERT_MODE.handleInsert(in) );
 			}
 		},
 		
@@ -390,7 +391,7 @@ public class SymbolEditorCanvas extends JPanel implements Scrollable {
 			@Override
 			String handleInsert( String in , DefaultInsert def )
 			{
-				return( "<mo>" + in + "</mo>" );
+				return( DefaultInsert.OPERATOR_INSERT_MODE.handleInsert(in) );
 			}
 		},
 		
@@ -402,7 +403,7 @@ public class SymbolEditorCanvas extends JPanel implements Scrollable {
 			@Override
 			String handleInsert( String in , DefaultInsert def )
 			{
-				return( "<mn>" + in + "</mn>" );
+				return( DefaultInsert.NUMBER_INSERT_MODE.handleInsert(in) );
 			}
 		};
 		

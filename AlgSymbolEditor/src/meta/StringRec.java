@@ -137,6 +137,8 @@ class StringRec extends Meta<StringRec> {
     /**
      * Gets the character at a particular "physical" index.  Note: the "+1" is a
      * kluge to support early versions of Apple MRJ (which had bugs).
+     * @param index The index at which to get the character.
+     * @return The character.
      */
     public final char getPhysicalChar(int index) {
         char mc[] = myRec;
@@ -146,6 +148,8 @@ class StringRec extends Meta<StringRec> {
     /**
      * Sets the character at a particular "physical" index.  Note: the "+1" is a
      * kluge to support early versions of Apple MRJ (which had bugs).
+     * @param index The index at which to set the character.
+     * @param inChar The character to set.
      */
     public final void setPhysicalChar(int index, char inChar) {
         char mrec[] = myRec;
@@ -154,6 +158,7 @@ class StringRec extends Meta<StringRec> {
     /**
      * Exports the contained array.  This is used by {@link FlexString} when it
      * strokes characters to a display device.
+     * @return The exported array.
      */
     public final char[] exportArray() {
         char mc[] = myRec;
@@ -166,6 +171,7 @@ class StringRec extends Meta<StringRec> {
     };
     /**
      * Copies the contents of the array to the StringRec <code>out</code>.
+     * @param out The destination for the copy.
      */
     public final void copyString(StringRec out) {
                 /*
@@ -188,6 +194,9 @@ class StringRec extends Meta<StringRec> {
      * Copies part of the string from one StringRec into another.
      * Don't know why I have to add one to the length in the code for
      * this routine, but it seems to fix obvious bugs.
+     * @param start_loc The start location of the copy.
+     * @param length The number of characters in the copy.
+     * @param out The destination of the copy.
      */
     public final void copyRegion(int start_loc, int length, StringRec out) {
         System.arraycopy(myRec, start_loc, out.exportArray(), start_loc, length + 1);

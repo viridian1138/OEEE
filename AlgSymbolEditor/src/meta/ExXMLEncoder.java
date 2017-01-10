@@ -47,7 +47,8 @@ public class ExXMLEncoder extends XMLEncoder {
             new ExPersistenceDelegate();
     
     /**
-     * @param arg0
+     * Constructs the encoder.
+     * @param arg0 The output stream to which to encode.
      */
     public ExXMLEncoder(OutputStream arg0) {
         super(arg0);
