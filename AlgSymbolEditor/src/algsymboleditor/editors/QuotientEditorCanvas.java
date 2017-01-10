@@ -446,6 +446,16 @@ public class QuotientEditorCanvas extends JPanel implements Scrollable {
 		
 		swingDisplayString.drawString(g, 10, 20);
 		
+		
+		final char nabla = (char) 8711;
+		final char alpha = (char) 945;
+		
+		final String d2 = "" + nabla + alpha;
+		
+		
+		g.drawString( d2 , 10 , 50 );
+		
+		
 		Path2D.Double p = new Path2D.Double();
 		
 		p.moveTo( 30.0 , 30.0 );
