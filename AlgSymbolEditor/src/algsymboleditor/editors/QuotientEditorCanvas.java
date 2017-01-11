@@ -375,6 +375,16 @@ public class QuotientEditorCanvas extends JPanel implements Scrollable {
 	FlexString swingDisplayString = new FlexString();
 	
 	/**
+	 * Temporary test rendering string.
+	 */
+	FlexString swingRendString = new FlexString();
+	
+	/**
+	 * Temporary use of regex.
+	 */
+	GenRegex genRegex = new GenRegex();
+	
+	/**
 	 * The dirty flag on the SWT thread.
 	 */
 	boolean swtDirty = false;
@@ -446,14 +456,7 @@ public class QuotientEditorCanvas extends JPanel implements Scrollable {
 		
 		swingDisplayString.drawString(g, 10, 20);
 		
-		
-		final char nabla = (char) 8711;
-		final char alpha = (char) 945;
-		
-		final String d2 = "" + nabla + alpha;
-		
-		
-		g.drawString( d2 , 10 , 50 );
+		swingRendString.drawString(g, 10, 50);
 		
 		
 		Path2D.Double p = new Path2D.Double();
@@ -692,6 +695,17 @@ public class QuotientEditorCanvas extends JPanel implements Scrollable {
 	{
 		swingDisplayString = genDisplayString( swingOverscriptLst,
 				swingUnderscriptLst );
+		ParseNode<Integer> pnode = genRegex.parse( swingDisplayString );
+		FlexString str = new FlexString();
+		while( pnode != null )
+		{
+			if( pnode instanceof LiteralRendNode )
+			{
+				( (LiteralRendNode) pnode ).getStr().insertString( str );
+			}
+			pnode = pnode.next;
+		}
+		swingRendString = str;
 	}
 	
 	
