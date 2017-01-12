@@ -503,48 +503,7 @@ public class QuotientEditorCanvas extends JPanel implements Scrollable {
 	 * @param insMode The default insertion mode.
 	 */
 	public void handleInsertSwing( String istr , DefaultInsert insMode )
-	{
-		try {
-			
-			KnowledgeBase knowledgeBase = getSwingKnowledgeBase();
-			
-			StatefulKnowledgeSession session = knowledgeBase.newStatefulKnowledgeSession();
-			
-			session.insert( new DroolsSession( session ) );
-			
-			final Random rand = new Random( 65432 );
-			
-			ParseNode<DoubleElem> currentParse = null;
-			
-			for( int count = 0 ; count < 10 ; count++ )
-			{
-				ParseNode<DoubleElem> node = new ParseNode<DoubleElem>( new DoubleElem( rand.nextDouble() ) , currentParse );
-				currentParse = node;
-				session.insert( node );
-				session.insert( node.parseValue );
-			}
-			
-			ParsePlaceholder<DoubleElem> placeholder = new ParsePlaceholder<DoubleElem>( currentParse );
-			
-			session.insert( placeholder );
-			
-			System.out.println( "AA: " + placeholder.getElem() );
-					
-			session.fireAllRules();
-
-			session.dispose();
-			
-			ParseNode<DoubleElem> prev = null;
-			ParseNode<DoubleElem> nxt = placeholder.getElem();
-			
-			System.out.println( "BB: " + placeholder.getElem() );
-			
-			}
-			catch( Throwable ex )
-			{
-				ex.printStackTrace( System.out );
-			}
-		
+	{	
 		final String dstr = insMode.handleInsert( istr );
 		
 		swingInsertMode.insertStringSwing( dstr , this );
@@ -560,48 +519,7 @@ public class QuotientEditorCanvas extends JPanel implements Scrollable {
 	 * Handles the deletion of the current symbol on the Swing thread.
 	 */
 	public void handleSymDeleteSwing( )
-	{
-		try {
-			
-			KnowledgeBase knowledgeBase = getSwingKnowledgeBase();
-			
-			StatefulKnowledgeSession session = knowledgeBase.newStatefulKnowledgeSession();
-			
-			session.insert( new DroolsSession( session ) );
-			
-			final Random rand = new Random( 65432 );
-			
-			ParseNode<DoubleElem> currentParse = null;
-			
-			for( int count = 0 ; count < 10 ; count++ )
-			{
-				ParseNode<DoubleElem> node = new ParseNode<DoubleElem>( new DoubleElem( rand.nextDouble() ) , currentParse );
-				currentParse = node;
-				session.insert( node );
-				session.insert( node.parseValue );
-			}
-			
-			ParsePlaceholder<DoubleElem> placeholder = new ParsePlaceholder<DoubleElem>( currentParse );
-			
-			session.insert( placeholder );
-			
-			System.out.println( "AA: " + placeholder.getElem() );
-					
-			session.fireAllRules();
-
-			session.dispose();
-			
-			ParseNode<DoubleElem> prev = null;
-			ParseNode<DoubleElem> nxt = placeholder.getElem();
-			
-			System.out.println( "BB: " + placeholder.getElem() );
-			
-			}
-			catch( Throwable ex )
-			{
-				ex.printStackTrace( System.out );
-			}
-		
+	{	
 		swingInsertMode.deleteSymSwing( this );
 		
 		updateSwingDisplayString();
@@ -615,48 +533,7 @@ public class QuotientEditorCanvas extends JPanel implements Scrollable {
 	 * Handles a delete request on the Swing thread.
 	 */
 	public void handleDeleteSwing( )
-	{
-		try {
-			
-			KnowledgeBase knowledgeBase = getSwingKnowledgeBase();
-			
-			StatefulKnowledgeSession session = knowledgeBase.newStatefulKnowledgeSession();
-			
-			session.insert( new DroolsSession( session ) );
-			
-			final Random rand = new Random( 65432 );
-			
-			ParseNode<DoubleElem> currentParse = null;
-			
-			for( int count = 0 ; count < 10 ; count++ )
-			{
-				ParseNode<DoubleElem> node = new ParseNode<DoubleElem>( new DoubleElem( rand.nextDouble() ) , currentParse );
-				currentParse = node;
-				session.insert( node );
-				session.insert( node.parseValue );
-			}
-			
-			ParsePlaceholder<DoubleElem> placeholder = new ParsePlaceholder<DoubleElem>( currentParse );
-			
-			session.insert( placeholder );
-			
-			System.out.println( "AA: " + placeholder.getElem() );
-					
-			session.fireAllRules();
-
-			session.dispose();
-			
-			ParseNode<DoubleElem> prev = null;
-			ParseNode<DoubleElem> nxt = placeholder.getElem();
-			
-			System.out.println( "BB: " + placeholder.getElem() );
-			
-			}
-			catch( Throwable ex )
-			{
-				ex.printStackTrace( System.out );
-			}
-		
+	{	
 		swingOverscriptLst.eraseAllInfo();
 		
 		swingUnderscriptLst.eraseAllInfo();
@@ -696,16 +573,45 @@ public class QuotientEditorCanvas extends JPanel implements Scrollable {
 		swingDisplayString = genDisplayString( swingOverscriptLst,
 				swingUnderscriptLst );
 		ParseNode<Integer> pnode = genRegex.parse( swingDisplayString );
-		FlexString str = new FlexString();
-		while( pnode != null )
+		
+		try
 		{
-			if( pnode instanceof LiteralRendNode )
+			KnowledgeBase knowledgeBase = getSwingKnowledgeBase();
+		
+			StatefulKnowledgeSession session = knowledgeBase.newStatefulKnowledgeSession();
+		
+			session.insert( new DroolsSession( session ) );
+		
+			ParsePlaceholder<Integer> placeholder = new ParsePlaceholder<Integer>( pnode );
+		
+			session.insert( placeholder );
+		
+			System.out.println( "AA: " + placeholder.getElem() );
+				
+			session.fireAllRules();
+
+			session.dispose();
+		
+			ParseNode<Integer> prev = null;
+			ParseNode<Integer> nxt = placeholder.getElem();
+		
+			System.out.println( "BB: " + placeholder.getElem() );
+		
+			FlexString str = new FlexString();
+			while( nxt != null )
 			{
-				( (LiteralRendNode) pnode ).getStr().insertString( str );
+				if( nxt instanceof LiteralRendNode )
+				{
+					( (LiteralRendNode) nxt ).getStr().insertString( str );
+				}
+				nxt = nxt.next;
 			}
-			pnode = pnode.next;
+			swingRendString = str;
 		}
-		swingRendString = str;
+		catch( Throwable ex )
+		{
+			ex.printStackTrace( System.out );
+		}
 	}
 	
 	
@@ -1019,39 +925,6 @@ public class QuotientEditorCanvas extends JPanel implements Scrollable {
 		try {
 			
 		readAlgQuotientEditor(is, swingOverscriptLst, swingUnderscriptLst);
-		
-		KnowledgeBase knowledgeBase = getSwingKnowledgeBase();
-		
-		StatefulKnowledgeSession session = knowledgeBase.newStatefulKnowledgeSession();
-		
-		session.insert( new DroolsSession( session ) );
-		
-		final Random rand = new Random( 65432 );
-		
-		ParseNode<DoubleElem> currentParse = null;
-		
-		for( int count = 0 ; count < 10 ; count++ )
-		{
-			ParseNode<DoubleElem> node = new ParseNode<DoubleElem>( new DoubleElem( rand.nextDouble() ) , currentParse );
-			currentParse = node;
-			session.insert( node );
-			session.insert( node.parseValue );
-		}
-		
-		ParsePlaceholder<DoubleElem> placeholder = new ParsePlaceholder<DoubleElem>( currentParse );
-		
-		session.insert( placeholder );
-		
-		System.out.println( "AA: " + placeholder.getElem() );
-				
-		session.fireAllRules();
-
-		session.dispose();
-		
-		ParseNode<DoubleElem> prev = null;
-		ParseNode<DoubleElem> nxt = placeholder.getElem();
-		
-		System.out.println( "BB: " + placeholder.getElem() );
 		
 		updateSwingDisplayString();
 		

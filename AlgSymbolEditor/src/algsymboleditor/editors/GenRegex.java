@@ -36,16 +36,33 @@ import meta.*;
 import java.util.*;
 
 
+/**
+ * Generates regular expression tokens from a MathML input string.
+ * 
+ * @author tgreen
+ *
+ */
 public class GenRegex {
 
+	/**
+	 * Callback map used in token generation.
+	 */
 	protected final HashMap<FlexString,Runnable> map = new HashMap<FlexString,Runnable>();
 	
-	
+	/**
+	 * The current ParseNode.
+	 */
 	protected ParseNode<Integer> pnode = null;
 	
+	/**
+	 * The current LiteralRendNode, or null.
+	 */
 	protected LiteralRendNode<Integer> lnode = null;
 	
 	
+	/**
+	 * Generates a new LiteralRendNode.
+	 */
 	protected void glnode()
 	{
 		if( lnode == null )
@@ -58,6 +75,9 @@ public class GenRegex {
 	}
 	
 	
+	/**
+	 * Constructs the Regex tokenizer.
+	 */
 	public GenRegex() {
 		
 		
@@ -99,6 +119,45 @@ public class GenRegex {
 			{
 				glnode();
 				lnode.getStr().insertChar( (char) 8711 );
+			}
+		});
+		
+		
+		
+		map.put( new FlexString( "&CenterDot;" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				glnode();
+				lnode.getStr().insertChar( (char) 0xb7 );
+			}
+		});
+		
+		
+		
+		map.put( new FlexString( "&lt;" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				glnode();
+				lnode.getStr().insertChar( '<' );
+			}
+		});
+		
+		
+		
+		map.put( new FlexString( "&gt;" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				glnode();
+				lnode.getStr().insertChar( '>' );
 			}
 		});
 		
@@ -740,7 +799,11 @@ public class GenRegex {
 	
 	
 	
-	
+	/**
+	 * Generates a token list from a string.
+	 * @param str The input string.
+	 * @return The token list.
+	 */
 	public ParseNode<Integer> parse( FlexString str )
 	{
 		int index = 0;
@@ -756,6 +819,12 @@ public class GenRegex {
 	
 	
 	
+	/**
+	 * Generates one token from a string.
+	 * @param str The string to parse.
+	 * @param index The current index in the string.
+	 * @return The parsed token.
+	 */
 	protected int parse( FlexString str , int index )
 	{
 		final char ch = str.getChar( index );
