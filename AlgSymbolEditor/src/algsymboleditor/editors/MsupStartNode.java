@@ -29,28 +29,34 @@
 
 package algsymboleditor.editors;
 
-import java.awt.Graphics2D;
+import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node used to represent a renderable parsed MathML production.
+ * Node indicating the end of a MathML mrow.
  * @author tgreen
  *
  * @param <R> Comparable to be used in node comparison.
  */
-public abstract class ParseRendNode< R extends Comparable<?> > extends ParseNode<R> {
+public class MsupStartNode< R extends Comparable<?> > extends ParseNode<R> {
 
 	/**
 	 * Constructs the node.
 	 * @param _parseValue The parsed token.
 	 * @param _next The next node in the list.
 	 */
-	public ParseRendNode(R _parseValue, ParseNode<R> _next) {
+	public MsupStartNode(R _parseValue, ParseNode<R> _next) {
 		super(_parseValue, _next);
 	}
 	
 	
-	public abstract void draw( Graphics2D g , int xoff , int yoff );
+	public MsupRendNode<R> applyParse( ParseRendNode<R> script , ParseRendNode<R> superscript , ParseNode<R> endNode , DroolsSession ds )
+	{
+		MsupRendNode r = new MsupRendNode( null , script , superscript );
+		r.next = endNode.next;
+		ds.insert( r );
+		return( r );
+	}
 
 	
 }

@@ -111,6 +111,72 @@ public class GenRegex {
 		
 		
 		
+		map.put( new FlexString( "<msup>" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ParseNode<Integer> anode = pnode;
+				pnode = new MsupStartNode<Integer>( Integer.valueOf( 3 ) , null );
+				anode.next = pnode;
+				lnode = null;
+			}
+		});
+		
+		
+		
+		map.put( new FlexString( "</msup>" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ParseNode<Integer> anode = pnode;
+				pnode = new MsupEndNode<Integer>( Integer.valueOf( 3 ) , null );
+				anode.next = pnode;
+				lnode = null;
+			}
+		});
+		
+		
+		
+		map.put( new FlexString( "</mi>" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				lnode = null;
+			}
+		});
+		
+		
+		
+		map.put( new FlexString( "</mo>" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				lnode = null;
+			}
+		});
+		
+		
+		
+		map.put( new FlexString( "</mn>" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				lnode = null;
+			}
+		});
+		
+		
+		
 		map.put( new FlexString( "&nabla;" ) , 
 				new Runnable()
 		{

@@ -29,6 +29,8 @@
 
 package algsymboleditor.editors;
 
+import java.awt.Graphics2D;
+
 import meta.FlexString;
 
 
@@ -38,7 +40,7 @@ import meta.FlexString;
  *
  * @param <R> Comparable to be used in node comparison.
  */
-public class LiteralRendNode< R extends Comparable<?> > extends ParseNode<R> {
+public class LiteralRendNode< R extends Comparable<?> > extends ParseRendNode<R> {
 
 	protected final FlexString str = new FlexString();
 	
@@ -55,6 +57,12 @@ public class LiteralRendNode< R extends Comparable<?> > extends ParseNode<R> {
 	public FlexString getStr()
 	{
 		return( str );
+	}
+
+
+	@Override
+	public void draw(Graphics2D g, int xoff, int yoff) {
+		str.drawString(g, xoff, yoff);
 	}
 
 	

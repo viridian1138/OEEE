@@ -497,7 +497,7 @@ public class SymbolEditorCanvas extends JPanel implements Scrollable {
 	/**
 	 * Temporary test rendering string.
 	 */
-	FlexString swingRendString = new FlexString();
+	ParseNode<Integer> swingRendNode = null;
 	
 	/**
 	 * Temporary use of regex.
@@ -579,7 +579,17 @@ public class SymbolEditorCanvas extends JPanel implements Scrollable {
 		
 		swingDisplayString.drawString(g, 10, 20);
 		
-		swingRendString.drawString(g, 10, 50);
+		int yy = 50;
+		ParseNode<Integer> nxt = swingRendNode;
+		while( nxt != null )
+		{
+			if( nxt instanceof ParseRendNode )
+			{
+				( (ParseRendNode) nxt ).draw(g, 10, yy);
+				yy += 30;
+			}
+			nxt = nxt.next;
+		}
 		
 		
 		Path2D.Double p = new Path2D.Double();
@@ -717,6 +727,15 @@ public class SymbolEditorCanvas extends JPanel implements Scrollable {
 			ParsePlaceholder<Integer> placeholder = new ParsePlaceholder<Integer>( pnode );
 		
 			session.insert( placeholder );
+			
+			{
+				ParseNode<Integer> rnode = pnode;
+				while( rnode != null )
+				{
+					session.insert( rnode );
+					rnode = rnode.next;
+				}
+			}
 		
 			System.out.println( "AA: " + placeholder.getElem() );
 				
@@ -729,16 +748,7 @@ public class SymbolEditorCanvas extends JPanel implements Scrollable {
 		
 			System.out.println( "BB: " + placeholder.getElem() );
 		
-			FlexString str = new FlexString();
-			while( nxt != null )
-			{
-				if( nxt instanceof LiteralRendNode )
-				{
-					( (LiteralRendNode) nxt ).getStr().insertString( str );
-				}
-				nxt = nxt.next;
-			}
-			swingRendString = str;
+			swingRendNode = nxt;
 		}
 		catch( Throwable ex )
 		{

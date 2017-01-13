@@ -27,30 +27,39 @@
 
 
 
+
 package algsymboleditor.editors;
 
 import java.awt.Graphics2D;
 
 
 /**
- * Node used to represent a renderable parsed MathML production.
+ * Node indicating a renderable version of an mrow.
  * @author tgreen
  *
  * @param <R> Comparable to be used in node comparison.
  */
-public abstract class ParseRendNode< R extends Comparable<?> > extends ParseNode<R> {
+public class MsupRendNode< R extends Comparable<?> > extends ParseRendNode<R> {
+	
+	protected ParseRendNode<R> script;
+	protected ParseRendNode<R> superscript;
 
 	/**
 	 * Constructs the node.
 	 * @param _parseValue The parsed token.
 	 * @param _next The next node in the list.
 	 */
-	public ParseRendNode(R _parseValue, ParseNode<R> _next) {
-		super(_parseValue, _next);
+	public MsupRendNode( R val, ParseRendNode<R> a, ParseRendNode<R> b) {
+		super( val , b.next );
+		script = a;
+		superscript = b;
 	}
-	
-	
-	public abstract void draw( Graphics2D g , int xoff , int yoff );
+
+	@Override
+	public void draw(Graphics2D g, int xoff, int yoff) {
+		script.draw(g, xoff, yoff);
+		superscript.draw(g, xoff + 15, yoff - 15);
+	}
 
 	
 }

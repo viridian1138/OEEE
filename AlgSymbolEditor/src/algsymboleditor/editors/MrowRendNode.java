@@ -30,6 +30,8 @@
 
 package algsymboleditor.editors;
 
+import java.awt.Graphics2D;
+
 
 /**
  * Node indicating a renderable version of an mrow.
@@ -46,6 +48,11 @@ public class MrowRendNode< R extends Comparable<?> > extends ParseRendNode<R> {
 	 */
 	public MrowRendNode(R _parseValue, ParseNode<R> _next) {
 		super(_parseValue, _next);
+	}
+
+	@Override
+	public void draw(Graphics2D g, int xoff, int yoff) {
+		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	}
 
 	
