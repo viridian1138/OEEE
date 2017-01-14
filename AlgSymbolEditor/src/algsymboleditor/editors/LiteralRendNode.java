@@ -38,19 +38,17 @@ import meta.FlexString;
  * Node used to represent a renderable parsed MathML production.
  * @author tgreen
  *
- * @param <R> Comparable to be used in node comparison.
  */
-public class LiteralRendNode< R extends Comparable<?> > extends ParseRendNode<R> {
+public class LiteralRendNode extends ParseRendNode {
 
 	protected final FlexString str = new FlexString();
 	
 	/**
 	 * Constructs the node.
-	 * @param _parseValue The parsed token.
 	 * @param _next The next node in the list.
 	 */
-	public LiteralRendNode(R _parseValue, ParseNode<R> _next) {
-		super(_parseValue, _next);
+	public LiteralRendNode(ParseNode _next) {
+		super(_next);
 	}
 	
 	

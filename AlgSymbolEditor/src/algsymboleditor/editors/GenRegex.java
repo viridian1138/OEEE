@@ -52,12 +52,12 @@ public class GenRegex {
 	/**
 	 * The current ParseNode.
 	 */
-	protected ParseNode<Integer> pnode = null;
+	protected ParseNode pnode = null;
 	
 	/**
 	 * The current LiteralRendNode, or null.
 	 */
-	protected LiteralRendNode<Integer> lnode = null;
+	protected LiteralRendNode lnode = null;
 	
 	
 	/**
@@ -67,8 +67,8 @@ public class GenRegex {
 	{
 		if( lnode == null )
 		{
-			ParseNode<Integer> anode = pnode;
-			lnode = new LiteralRendNode( Integer.valueOf( 3 ) , null );
+			ParseNode anode = pnode;
+			lnode = new LiteralRendNode( null );
 			anode.next = lnode;
 			pnode = lnode;
 		}
@@ -87,8 +87,8 @@ public class GenRegex {
 			@Override
 			public void run()
 			{
-				ParseNode<Integer> anode = pnode;
-				pnode = new MrowStartNode<Integer>( Integer.valueOf( 3 ) , null );
+				ParseNode anode = pnode;
+				pnode = new MrowStartNode( null );
 				anode.next = pnode;
 				lnode = null;
 			}
@@ -102,8 +102,8 @@ public class GenRegex {
 			@Override
 			public void run()
 			{
-				ParseNode<Integer> anode = pnode;
-				pnode = new MrowEndNode<Integer>( Integer.valueOf( 3 ) , null );
+				ParseNode anode = pnode;
+				pnode = new MrowEndNode( null );
 				anode.next = pnode;
 				lnode = null;
 			}
@@ -117,8 +117,8 @@ public class GenRegex {
 			@Override
 			public void run()
 			{
-				ParseNode<Integer> anode = pnode;
-				pnode = new MsupStartNode<Integer>( Integer.valueOf( 3 ) , null );
+				ParseNode anode = pnode;
+				pnode = new MsupStartNode( null );
 				anode.next = pnode;
 				lnode = null;
 			}
@@ -132,8 +132,98 @@ public class GenRegex {
 			@Override
 			public void run()
 			{
-				ParseNode<Integer> anode = pnode;
-				pnode = new MsupEndNode<Integer>( Integer.valueOf( 3 ) , null );
+				ParseNode anode = pnode;
+				pnode = new MsupEndNode( null );
+				anode.next = pnode;
+				lnode = null;
+			}
+		});
+		
+		
+		
+		map.put( new FlexString( "<msub>" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ParseNode anode = pnode;
+				pnode = new MsubStartNode( null );
+				anode.next = pnode;
+				lnode = null;
+			}
+		});
+		
+		
+		
+		map.put( new FlexString( "</msub>" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ParseNode anode = pnode;
+				pnode = new MsubEndNode( null );
+				anode.next = pnode;
+				lnode = null;
+			}
+		});
+		
+
+		
+		map.put( new FlexString( "<mover>" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ParseNode anode = pnode;
+				pnode = new MoverStartNode( null );
+				anode.next = pnode;
+				lnode = null;
+			}
+		});
+		
+		
+		
+		map.put( new FlexString( "</mover>" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ParseNode anode = pnode;
+				pnode = new MoverEndNode( null );
+				anode.next = pnode;
+				lnode = null;
+			}
+		});
+		
+		
+
+		map.put( new FlexString( "<munder>" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ParseNode anode = pnode;
+				pnode = new MunderStartNode( null );
+				anode.next = pnode;
+				lnode = null;
+			}
+		});
+		
+		
+		
+		map.put( new FlexString( "</munder>" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ParseNode anode = pnode;
+				pnode = new MunderEndNode( null );
 				anode.next = pnode;
 				lnode = null;
 			}
@@ -224,6 +314,21 @@ public class GenRegex {
 			{
 				glnode();
 				lnode.getStr().insertChar( '>' );
+			}
+		});
+		
+		
+		
+		map.put( new FlexString( "&#9633;" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				lnode = null;
+				glnode();
+				lnode.getStr().insertChar( (char) 9633 );
+				lnode = null;
 			}
 		});
 		
@@ -870,12 +975,12 @@ public class GenRegex {
 	 * @param str The input string.
 	 * @return The token list.
 	 */
-	public ParseNode<Integer> parse( FlexString str )
+	public ParseNode parse( FlexString str )
 	{
 		int index = 0;
-		pnode = new MrowStartNode<Integer>( Integer.valueOf( 3 ) , null);
+		pnode = new MrowStartNode( null );
 		lnode = null;
-		final ParseNode<Integer> rnode = pnode;
+		final ParseNode rnode = pnode;
 		while( str.getChar( index ) != '\0' )
 		{
 			index = parse( str , index );

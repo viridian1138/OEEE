@@ -36,23 +36,22 @@ import simplealgebra.symbolic.DroolsSession;
  * Node indicating the end of a MathML mrow.
  * @author tgreen
  *
- * @param <R> Comparable to be used in node comparison.
  */
-public class MsupStartNode< R extends Comparable<?> > extends ParseNode<R> {
+public class MsupStartNode extends ParseNode {
 
 	/**
 	 * Constructs the node.
 	 * @param _parseValue The parsed token.
 	 * @param _next The next node in the list.
 	 */
-	public MsupStartNode(R _parseValue, ParseNode<R> _next) {
-		super(_parseValue, _next);
+	public MsupStartNode(ParseNode _next) {
+		super(_next);
 	}
 	
 	
-	public MsupRendNode<R> applyParse( ParseRendNode<R> script , ParseRendNode<R> superscript , ParseNode<R> endNode , DroolsSession ds )
+	public MsupRendNode applyParse( ParseRendNode script , ParseRendNode superscript , ParseNode endNode , DroolsSession ds )
 	{
-		MsupRendNode r = new MsupRendNode( null , script , superscript );
+		MsupRendNode r = new MsupRendNode( script , superscript );
 		r.next = endNode.next;
 		ds.insert( r );
 		return( r );

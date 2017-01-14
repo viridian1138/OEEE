@@ -377,7 +377,7 @@ public class QuotientEditorCanvas extends JPanel implements Scrollable {
 	/**
 	 * Temporary test rendering string.
 	 */
-	ParseNode<Integer> swingRendNode = null;
+	ParseNode swingRendNode = null;
 	
 	/**
 	 * Temporary use of regex.
@@ -457,7 +457,7 @@ public class QuotientEditorCanvas extends JPanel implements Scrollable {
 		swingDisplayString.drawString(g, 10, 20);
 		
 		int yy = 50;
-		ParseNode<Integer> nxt = swingRendNode;
+		ParseNode nxt = swingRendNode;
 		while( nxt != null )
 		{
 			if( nxt instanceof ParseRendNode )
@@ -582,7 +582,7 @@ public class QuotientEditorCanvas extends JPanel implements Scrollable {
 	{
 		swingDisplayString = genDisplayString( swingOverscriptLst,
 				swingUnderscriptLst );
-		ParseNode<Integer> pnode = genRegex.parse( swingDisplayString );
+		ParseNode pnode = genRegex.parse( swingDisplayString );
 		
 		try
 		{
@@ -592,12 +592,12 @@ public class QuotientEditorCanvas extends JPanel implements Scrollable {
 		
 			session.insert( new DroolsSession( session ) );
 		
-			ParsePlaceholder<Integer> placeholder = new ParsePlaceholder<Integer>( pnode );
+			ParsePlaceholder placeholder = new ParsePlaceholder( pnode );
 		
 			session.insert( placeholder );
 			
 			{
-				ParseNode<Integer> rnode = pnode;
+				ParseNode rnode = pnode;
 				while( rnode != null )
 				{
 					session.insert( rnode );
@@ -611,8 +611,8 @@ public class QuotientEditorCanvas extends JPanel implements Scrollable {
 
 			session.dispose();
 		
-			ParseNode<Integer> prev = null;
-			ParseNode<Integer> nxt = placeholder.getElem();
+			ParseNode prev = null;
+			ParseNode nxt = placeholder.getElem();
 		
 			System.out.println( "BB: " + placeholder.getElem() );
 		

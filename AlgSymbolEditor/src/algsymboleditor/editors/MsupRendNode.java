@@ -37,20 +37,19 @@ import java.awt.Graphics2D;
  * Node indicating a renderable version of an mrow.
  * @author tgreen
  *
- * @param <R> Comparable to be used in node comparison.
  */
-public class MsupRendNode< R extends Comparable<?> > extends ParseRendNode<R> {
+public class MsupRendNode extends ParseRendNode {
 	
-	protected ParseRendNode<R> script;
-	protected ParseRendNode<R> superscript;
+	protected ParseRendNode script;
+	protected ParseRendNode superscript;
 
 	/**
 	 * Constructs the node.
 	 * @param _parseValue The parsed token.
 	 * @param _next The next node in the list.
 	 */
-	public MsupRendNode( R val, ParseRendNode<R> a, ParseRendNode<R> b) {
-		super( val , b.next );
+	public MsupRendNode( ParseRendNode a, ParseRendNode b) {
+		super( b.next );
 		script = a;
 		superscript = b;
 	}

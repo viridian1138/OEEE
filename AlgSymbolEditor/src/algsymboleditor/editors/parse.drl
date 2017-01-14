@@ -22,15 +22,12 @@ package algsymboleditor.editors;
 
 
 
-import java.lang.Comparable;
 import simplealgebra.DoubleElem;
 import simplealgebra.symbolic.DroolsSession;
 import algsymboleditor.editors.ParseNode;
 import algsymboleditor.editors.ParseReng;
 import algsymboleditor.editors.ParsePlaceholder;
-import algsymboleditor.editors.MsupStartNode;
-import algsymboleditor.editors.MsupEndNode;
-import algsymboleditor.editors.MsupRendNode;
+
 
 
 
@@ -83,6 +80,72 @@ rule "Msup Node"
           ds : DroolsSession()
      then
 //          System.out.println( "Msup Node " + p0 );
+          insert( new ParseReng( p0 , p0.applyParse( p1 , p2 , p3 , ds ) ) );
+end
+
+
+
+
+
+
+
+rule "Msub Node"
+     when
+          p0 : MsubStartNode( )
+          p1 : ParseRendNode( ) from p0.next;
+          p2 : ParseRendNode( ) from p1.next;
+          p3 : MsubEndNode( ) from p2.next
+          not( ParseReng( strt == p0 ) )
+          not( ParseReng( strt == p1 ) )
+          not( ParseReng( strt == p2 ) )
+          not( ParseReng( strt == p3 ) )
+          ds : DroolsSession()
+     then
+//          System.out.println( "Msub Node " + p0 );
+          insert( new ParseReng( p0 , p0.applyParse( p1 , p2 , p3 , ds ) ) );
+end
+
+
+
+
+
+
+
+rule "Mover Node"
+     when
+          p0 : MoverStartNode( )
+          p1 : ParseRendNode( ) from p0.next;
+          p2 : ParseRendNode( ) from p1.next;
+          p3 : MoverEndNode( ) from p2.next
+          not( ParseReng( strt == p0 ) )
+          not( ParseReng( strt == p1 ) )
+          not( ParseReng( strt == p2 ) )
+          not( ParseReng( strt == p3 ) )
+          ds : DroolsSession()
+     then
+//          System.out.println( "Mover Node " + p0 );
+          insert( new ParseReng( p0 , p0.applyParse( p1 , p2 , p3 , ds ) ) );
+end
+
+
+
+
+
+
+
+rule "Munder Node"
+     when
+          p0 : MunderStartNode( )
+          p1 : ParseRendNode( ) from p0.next;
+          p2 : ParseRendNode( ) from p1.next;
+          p3 : MunderEndNode( ) from p2.next
+          not( ParseReng( strt == p0 ) )
+          not( ParseReng( strt == p1 ) )
+          not( ParseReng( strt == p2 ) )
+          not( ParseReng( strt == p3 ) )
+          ds : DroolsSession()
+     then
+//          System.out.println( "Munder Node " + p0 );
           insert( new ParseReng( p0 , p0.applyParse( p1 , p2 , p3 , ds ) ) );
 end
 

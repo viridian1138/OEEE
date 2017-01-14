@@ -35,13 +35,13 @@ package algsymboleditor.editors;
  * @author tgreen
  *
  */
-public class MsupEndNode extends ParseNode {
+public class MsubEndNode extends ParseNode {
 
 	/**
 	 * Constructs the node.
 	 * @param _next The next node in the list.
 	 */
-	public MsupEndNode(ParseNode _next) {
+	public MsubEndNode(ParseNode _next) {
 		super(_next);
 	}
 

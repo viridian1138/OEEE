@@ -41,9 +41,8 @@ import simplealgebra.symbolic.DroolsSession;
  * 
  * @author thorngreen
  *
- * @param <R> The comparable type of the parse nodes.
  */
-public class ParsePlaceholder<R extends Comparable<?>>
+public class ParsePlaceholder
 {
 
 	/**
@@ -51,7 +50,7 @@ public class ParsePlaceholder<R extends Comparable<?>>
 	 * 
 	 * @param _elem The enclosed elem.
 	 */
-	public ParsePlaceholder( ParseNode<R> _elem )
+	public ParsePlaceholder( ParseNode _elem )
 	{
 		elem = _elem;
 	}
@@ -62,7 +61,7 @@ public class ParsePlaceholder<R extends Comparable<?>>
 	 * @param _elem The enclosed elem.
 	 * @param ds The Drools session.
 	 */
-	public ParsePlaceholder( ParseNode<R> _elem , DroolsSession ds )
+	public ParsePlaceholder( ParseNode _elem , DroolsSession ds )
 	{
 		this( _elem );
 		ds.insert( this );
@@ -75,7 +74,7 @@ public class ParsePlaceholder<R extends Comparable<?>>
 	 * 
 	 * @return The enclosed elem.
 	 */
-	public ParseNode<R> getElem() {
+	public ParseNode getElem() {
 		return elem;
 	}
 	
@@ -85,7 +84,7 @@ public class ParsePlaceholder<R extends Comparable<?>>
 	 * 
 	 * @param _elem The enclosed elem.
 	 */
-	public void setElem( ParseNode<R> _elem ) {
+	public void setElem( ParseNode _elem ) {
 		elem  = _elem;
 	}
 
@@ -93,7 +92,7 @@ public class ParsePlaceholder<R extends Comparable<?>>
 	/**
 	 * The enclosed elem.
 	 */
-	private ParseNode<R> elem;
+	private ParseNode elem;
 
 }
 

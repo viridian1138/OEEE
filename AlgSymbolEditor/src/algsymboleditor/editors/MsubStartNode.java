@@ -29,20 +29,32 @@
 
 package algsymboleditor.editors;
 
+import simplealgebra.symbolic.DroolsSession;
+
 
 /**
  * Node indicating the end of a MathML mrow.
  * @author tgreen
  *
  */
-public class MsupEndNode extends ParseNode {
+public class MsubStartNode extends ParseNode {
 
 	/**
 	 * Constructs the node.
+	 * @param _parseValue The parsed token.
 	 * @param _next The next node in the list.
 	 */
-	public MsupEndNode(ParseNode _next) {
+	public MsubStartNode(ParseNode _next) {
 		super(_next);
+	}
+	
+	
+	public MsubRendNode applyParse( ParseRendNode script , ParseRendNode superscript , ParseNode endNode , DroolsSession ds )
+	{
+		MsubRendNode r = new MsubRendNode( script , superscript );
+		r.next = endNode.next;
+		ds.insert( r );
+		return( r );
 	}
 
 	

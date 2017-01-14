@@ -27,22 +27,37 @@
 
 
 
+
 package algsymboleditor.editors;
+
+import java.awt.Graphics2D;
 
 
 /**
- * Node indicating the end of a MathML mrow.
+ * Node indicating a renderable version of an mrow.
  * @author tgreen
  *
  */
-public class MsupEndNode extends ParseNode {
+public class MsubRendNode extends ParseRendNode {
+	
+	protected ParseRendNode script;
+	protected ParseRendNode subscript;
 
 	/**
 	 * Constructs the node.
+	 * @param _parseValue The parsed token.
 	 * @param _next The next node in the list.
 	 */
-	public MsupEndNode(ParseNode _next) {
-		super(_next);
+	public MsubRendNode( ParseRendNode a, ParseRendNode b) {
+		super( b.next );
+		script = a;
+		subscript = b;
+	}
+
+	@Override
+	public void draw(Graphics2D g, int xoff, int yoff) {
+		script.draw(g, xoff, yoff);
+		subscript.draw(g, xoff + 15, yoff + 15);
 	}
 
 	

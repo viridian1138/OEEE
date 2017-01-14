@@ -37,17 +37,15 @@ import java.awt.Graphics2D;
  * Node indicating a renderable version of an mrow.
  * @author tgreen
  *
- * @param <R> Comparable to be used in node comparison.
  */
-public class MrowRendNode< R extends Comparable<?> > extends ParseRendNode<R> {
+public class MrowRendNode extends ParseRendNode {
 
 	/**
 	 * Constructs the node.
-	 * @param _parseValue The parsed token.
 	 * @param _next The next node in the list.
 	 */
-	public MrowRendNode(R _parseValue, ParseNode<R> _next) {
-		super(_parseValue, _next);
+	public MrowRendNode(ParseNode _next) {
+		super(_next);
 	}
 
 	@Override

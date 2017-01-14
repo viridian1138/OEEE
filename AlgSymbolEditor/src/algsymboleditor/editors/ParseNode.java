@@ -41,19 +41,16 @@ import simplealgebra.symbolic.DroolsSession;
  * 
  * @author tgreen
  *
- * @param <R> The comparable type of the parse nodes.
  */
-public class ParseNode<R extends Comparable<?> > implements Comparable<ParseNode<R>> {
+public class ParseNode {
 	
 	
 	/**
 	 * Constructs the parsing node.
-	 * @param _parseValue The value represented by the node.
 	 * @param _next The next node in the list.
 	 */
-	public ParseNode( R _parseValue , ParseNode<R> _next )
+	public ParseNode( ParseNode _next )
 	{
-		parseValue = _parseValue;
 		next = _next;
 	}
 
@@ -64,10 +61,10 @@ public class ParseNode<R extends Comparable<?> > implements Comparable<ParseNode
 	 * @param ds The rule session.
 	 * @return The new parse node.
 	 */
-	public ParseNode<R> applyParse( ParseNode<R> p1 , DroolsSession ds )
+	public ParseNode applyParse( ParseNode p1 , DroolsSession ds )
 	{
-		ParseNode<R> p1p = new ParseNode<R>( parseValue , p1.next );
-		ParseNode<R> p0p = new ParseNode( p1.parseValue , p1p );
+		ParseNode p1p = new ParseNode( p1.next );
+		ParseNode p0p = new ParseNode( p1p );
 		ds.insert( p1p );
 		ds.insert( p0p );
 		return( p0p );
@@ -80,31 +77,19 @@ public class ParseNode<R extends Comparable<?> > implements Comparable<ParseNode
 	 * @param ds The rule session.
 	 * @return The new parse node.
 	 */
-	public ParseNode<R> applyReng( ParseNode<R> nxt , DroolsSession ds )
+	public ParseNode applyReng( ParseNode nxt , DroolsSession ds )
 	{
-		ParseNode<R> p0 = new ParseNode<R>( parseValue , nxt );
+		ParseNode p0 = new ParseNode( nxt );
 		ds.insert( p0 );
 		return( p0 );
 	}
 	
 	
 	/**
-	 * The value being parseed.
-	 */
-	protected R parseValue = null;
-	
-	
-	/**
 	 * The next value in the list.  Kept public so that Drools ( <A href="http://drools.org">http://drools.org</A> ) can have direct access.
 	 */
-	public ParseNode<R> next = null;
+	public ParseNode next = null;
 
-
-	@Override
-	public int compareTo(ParseNode<R> arg0) {
-		Comparable c = parseValue;
-		return( c.compareTo( arg0.parseValue ) );
-	}
 
 	
 }

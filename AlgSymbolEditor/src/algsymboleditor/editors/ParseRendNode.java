@@ -36,17 +36,15 @@ import java.awt.Graphics2D;
  * Node used to represent a renderable parsed MathML production.
  * @author tgreen
  *
- * @param <R> Comparable to be used in node comparison.
  */
-public abstract class ParseRendNode< R extends Comparable<?> > extends ParseNode<R> {
+public abstract class ParseRendNode extends ParseNode {
 
 	/**
 	 * Constructs the node.
-	 * @param _parseValue The parsed token.
 	 * @param _next The next node in the list.
 	 */
-	public ParseRendNode(R _parseValue, ParseNode<R> _next) {
-		super(_parseValue, _next);
+	public ParseRendNode(ParseNode _next) {
+		super(_next);
 	}
 	
 	

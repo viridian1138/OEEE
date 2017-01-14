@@ -37,9 +37,8 @@ package algsymboleditor.editors;
  * 
  * @author thorngreen
  *
- * @param <R> The comparable type of the parse nodes.
  */
-public class ParseReng<R extends Comparable<?> > {
+public class ParseReng {
 	
 	/**
 	 * Constructs the node.
@@ -47,7 +46,7 @@ public class ParseReng<R extends Comparable<?> > {
 	 * @param _strt The starting point of the refactoring.
 	 * @param _end The result of the refactoring.
 	 */
-	public ParseReng( ParseNode<R> _strt , ParseNode<R> _end )
+	public ParseReng( ParseNode _strt , ParseNode _end )
 	{
 		strt = _strt;
 		end = _end;
@@ -58,7 +57,7 @@ public class ParseReng<R extends Comparable<?> > {
 	 * 
 	 * @return The starting point of the refactoring.
 	 */
-	public ParseNode<R> getStrt() {
+	public ParseNode getStrt() {
 		return strt;
 	}
 	
@@ -67,19 +66,19 @@ public class ParseReng<R extends Comparable<?> > {
 	 * 
 	 * @return The result of the refactoring.
 	 */
-	public ParseNode<R> getEnd() {
+	public ParseNode getEnd() {
 		return end;
 	}
 	
 	/**
 	 * The starting point of the refactoring.
 	 */
-	private ParseNode<R> strt;
+	private ParseNode strt;
 	
 	/**
 	 * The result of the refactoring.
 	 */
-	private ParseNode<R> end;
+	private ParseNode end;
 
 }
 

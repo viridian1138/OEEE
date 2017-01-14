@@ -34,17 +34,15 @@ package algsymboleditor.editors;
  * Node indicating the end of a MathML mrow.
  * @author tgreen
  *
- * @param <R> Comparable to be used in node comparison.
  */
-public class MrowEndNode< R extends Comparable<?> > extends ParseNode<R> {
+public class MrowEndNode extends ParseNode {
 
 	/**
 	 * Constructs the node.
-	 * @param _parseValue The parsed token.
 	 * @param _next The next node in the list.
 	 */
-	public MrowEndNode(R _parseValue, ParseNode<R> _next) {
-		super(_parseValue, _next);
+	public MrowEndNode(ParseNode _next) {
+		super(_next);
 	}
 
 	
