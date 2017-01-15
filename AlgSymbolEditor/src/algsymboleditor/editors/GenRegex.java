@@ -230,6 +230,96 @@ public class GenRegex {
 		});
 		
 		
+
+		map.put( new FlexString( "<msubsup>" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ParseNode anode = pnode;
+				pnode = new MsubsupStartNode( null );
+				anode.next = pnode;
+				lnode = null;
+			}
+		});
+		
+		
+		
+		map.put( new FlexString( "</msubsup>" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ParseNode anode = pnode;
+				pnode = new MsubsupEndNode( null );
+				anode.next = pnode;
+				lnode = null;
+			}
+		});
+		
+		
+
+		map.put( new FlexString( "<munderover>" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ParseNode anode = pnode;
+				pnode = new MunderoverStartNode( null );
+				anode.next = pnode;
+				lnode = null;
+			}
+		});
+		
+		
+		
+		map.put( new FlexString( "</munderover>" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ParseNode anode = pnode;
+				pnode = new MunderoverEndNode( null );
+				anode.next = pnode;
+				lnode = null;
+			}
+		});
+		
+		
+
+		map.put( new FlexString( "<mfrac>" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ParseNode anode = pnode;
+				pnode = new MfracStartNode( null );
+				anode.next = pnode;
+				lnode = null;
+			}
+		});
+		
+		
+		
+		map.put( new FlexString( "</mfrac>" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ParseNode anode = pnode;
+				pnode = new MfracEndNode( null );
+				anode.next = pnode;
+				lnode = null;
+			}
+		});
+		
+		
 		
 		map.put( new FlexString( "</mi>" ) , 
 				new Runnable()

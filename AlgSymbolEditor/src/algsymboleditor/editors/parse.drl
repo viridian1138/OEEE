@@ -155,3 +155,73 @@ end
 
 
 
+rule "Msubsup Node"
+     when
+          p0 : MsubsupStartNode( )
+          p1 : ParseRendNode( ) from p0.next;
+          p2 : ParseRendNode( ) from p1.next;
+          p3 : ParseRendNode( ) from p2.next;
+          p4 : MsubsupEndNode( ) from p3.next
+          not( ParseReng( strt == p0 ) )
+          not( ParseReng( strt == p1 ) )
+          not( ParseReng( strt == p2 ) )
+          not( ParseReng( strt == p3 ) )
+          not( ParseReng( strt == p4 ) )
+          ds : DroolsSession()
+     then
+//          System.out.println( "Msubsup Node " + p0 );
+          insert( new ParseReng( p0 , p0.applyParse( p1 , p2 , p3 , p4 , ds ) ) );
+end
+
+
+
+
+
+
+
+rule "Munderover Node"
+     when
+          p0 : MunderoverStartNode( )
+          p1 : ParseRendNode( ) from p0.next;
+          p2 : ParseRendNode( ) from p1.next;
+          p3 : ParseRendNode( ) from p2.next;
+          p4 : MunderoverEndNode( ) from p3.next
+          not( ParseReng( strt == p0 ) )
+          not( ParseReng( strt == p1 ) )
+          not( ParseReng( strt == p2 ) )
+          not( ParseReng( strt == p3 ) )
+          not( ParseReng( strt == p4 ) )
+          ds : DroolsSession()
+     then
+//          System.out.println( "Munderover Node " + p0 );
+          insert( new ParseReng( p0 , p0.applyParse( p1 , p2 , p3 , p4 , ds ) ) );
+end
+
+
+
+
+
+
+
+rule "Mfrac Node"
+     when
+          p0 : MfracStartNode( )
+          p1 : ParseRendNode( ) from p0.next;
+          p2 : ParseRendNode( ) from p1.next;
+          p3 : MfracEndNode( ) from p2.next
+          not( ParseReng( strt == p0 ) )
+          not( ParseReng( strt == p1 ) )
+          not( ParseReng( strt == p2 ) )
+          not( ParseReng( strt == p3 ) )
+          ds : DroolsSession()
+     then
+//          System.out.println( "Mfrac Node " + p0 );
+          insert( new ParseReng( p0 , p0.applyParse( p1 , p2 , p3 , ds ) ) );
+end
+
+
+
+
+
+
+
