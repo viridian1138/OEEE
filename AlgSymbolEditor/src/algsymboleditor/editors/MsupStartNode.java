@@ -56,6 +56,15 @@ public class MsupStartNode extends ParseNode {
 		ds.insert( r );
 		return( r );
 	}
+	
+	
+	@Override
+	public ParseNode applyReng( ParseNode nxt , DroolsSession ds )
+	{
+		MsupStartNode p0 = new MsupStartNode( nxt );
+		ds.insert( p0 );
+		return( p0 );
+	}
 
 	
 }

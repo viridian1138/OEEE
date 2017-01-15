@@ -56,6 +56,15 @@ public class MoverStartNode extends ParseNode {
 		ds.insert( r );
 		return( r );
 	}
+	
+	
+	@Override
+	public ParseNode applyReng( ParseNode nxt , DroolsSession ds )
+	{
+		MoverStartNode p0 = new MoverStartNode( nxt );
+		ds.insert( p0 );
+		return( p0 );
+	}
 
 	
 }

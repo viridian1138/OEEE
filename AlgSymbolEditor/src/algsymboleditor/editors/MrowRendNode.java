@@ -32,6 +32,8 @@ package algsymboleditor.editors;
 
 import java.awt.Graphics2D;
 
+import simplealgebra.symbolic.DroolsSession;
+
 
 /**
  * Node indicating a renderable version of an mrow.
@@ -51,6 +53,16 @@ public class MrowRendNode extends ParseRendNode {
 	@Override
 	public void draw(Graphics2D g, int xoff, int yoff) {
 		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	}
+	
+	
+	@Override
+	public ParseNode applyReng( ParseNode nxt , DroolsSession ds )
+	{
+		MrowRendNode p0 = new MrowRendNode( nxt );
+		p0.next = nxt; // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		ds.insert( p0 );
+		return( p0 );
 	}
 
 	

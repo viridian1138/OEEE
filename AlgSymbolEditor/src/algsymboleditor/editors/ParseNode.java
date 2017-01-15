@@ -42,7 +42,7 @@ import simplealgebra.symbolic.DroolsSession;
  * @author tgreen
  *
  */
-public class ParseNode {
+public abstract class ParseNode {
 	
 	
 	/**
@@ -53,22 +53,6 @@ public class ParseNode {
 	{
 		next = _next;
 	}
-
-	
-	/**
-	 * Applies the parsing of adjacent nodes.
-	 * @param p1 The previous adjacent node.
-	 * @param ds The rule session.
-	 * @return The new parse node.
-	 */
-	public ParseNode applyParse( ParseNode p1 , DroolsSession ds )
-	{
-		ParseNode p1p = new ParseNode( p1.next );
-		ParseNode p0p = new ParseNode( p1p );
-		ds.insert( p1p );
-		ds.insert( p0p );
-		return( p0p );
-	}
 	
 	
 	/**
@@ -77,12 +61,8 @@ public class ParseNode {
 	 * @param ds The rule session.
 	 * @return The new parse node.
 	 */
-	public ParseNode applyReng( ParseNode nxt , DroolsSession ds )
-	{
-		ParseNode p0 = new ParseNode( nxt );
-		ds.insert( p0 );
-		return( p0 );
-	}
+	public abstract ParseNode applyReng( ParseNode nxt , DroolsSession ds );
+	
 	
 	
 	/**

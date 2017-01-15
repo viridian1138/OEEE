@@ -32,6 +32,8 @@ package algsymboleditor.editors;
 
 import java.awt.Graphics2D;
 
+import simplealgebra.symbolic.DroolsSession;
+
 
 /**
  * Node indicating a renderable version of an mrow.
@@ -50,7 +52,7 @@ public class MunderoverRendNode extends ParseRendNode {
 	 * @param _next The next node in the list.
 	 */
 	public MunderoverRendNode( ParseRendNode a, ParseRendNode b, ParseRendNode c) {
-		super( b.next );
+		super( c.next );
 		script = a;
 		underscript = b;
 		overscript = c;
@@ -61,6 +63,16 @@ public class MunderoverRendNode extends ParseRendNode {
 		script.draw(g, xoff, yoff);
 		underscript.draw(g, xoff, yoff + 15);
 		overscript.draw(g, xoff, yoff - 15);
+	}
+	
+	
+	@Override
+	public ParseNode applyReng( ParseNode nxt , DroolsSession ds )
+	{
+		MunderoverRendNode p0 = new MunderoverRendNode( script , underscript , overscript );
+		p0.next = nxt;
+		ds.insert( p0 );
+		return( p0 );
 	}
 
 	

@@ -56,6 +56,15 @@ public class MfracStartNode extends ParseNode {
 		ds.insert( r );
 		return( r );
 	}
+	
+	
+	@Override
+	public ParseNode applyReng( ParseNode nxt , DroolsSession ds )
+	{
+		MfracStartNode p0 = new MfracStartNode( nxt );
+		ds.insert( p0 );
+		return( p0 );
+	}
 
 	
 }

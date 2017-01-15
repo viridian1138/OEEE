@@ -56,6 +56,15 @@ public class MunderoverStartNode extends ParseNode {
 		ds.insert( r );
 		return( r );
 	}
+	
+	
+	@Override
+	public ParseNode applyReng( ParseNode nxt , DroolsSession ds )
+	{
+		MunderoverStartNode p0 = new MunderoverStartNode( nxt );
+		ds.insert( p0 );
+		return( p0 );
+	}
 
 	
 }

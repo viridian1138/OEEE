@@ -31,6 +31,7 @@ package algsymboleditor.editors;
 
 import java.awt.Graphics2D;
 
+import simplealgebra.symbolic.DroolsSession;
 import meta.FlexString;
 
 
@@ -61,6 +62,17 @@ public class LiteralRendNode extends ParseRendNode {
 	@Override
 	public void draw(Graphics2D g, int xoff, int yoff) {
 		str.drawString(g, xoff, yoff);
+	}
+	
+	
+	@Override
+	public ParseNode applyReng( ParseNode nxt , DroolsSession ds )
+	{
+		LiteralRendNode p0 = new LiteralRendNode( nxt );
+		p0.next = nxt;
+		str.copyAllInfo( p0.str );
+		ds.insert( p0 );
+		return( p0 );
 	}
 
 	

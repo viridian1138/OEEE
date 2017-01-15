@@ -29,6 +29,8 @@
 
 package algsymboleditor.editors;
 
+import simplealgebra.symbolic.DroolsSession;
+
 
 /**
  * Node indicating the end of a MathML mrow.
@@ -43,6 +45,15 @@ public class MrowStartNode extends ParseNode {
 	 */
 	public MrowStartNode(ParseNode _next) {
 		super(_next);
+	}
+	
+	
+	@Override
+	public ParseNode applyReng( ParseNode nxt , DroolsSession ds )
+	{
+		MrowStartNode p0 = new MrowStartNode( nxt );
+		ds.insert( p0 );
+		return( p0 );
 	}
 
 	
