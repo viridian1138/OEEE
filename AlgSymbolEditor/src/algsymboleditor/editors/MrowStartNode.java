@@ -55,6 +55,14 @@ public class MrowStartNode extends ParseNode {
 		ds.insert( p0 );
 		return( p0 );
 	}
+	
+	
+	public MrowCondNode applyMrowStart( DroolsSession ds )
+	{
+		MrowCondNode r = new MrowCondNode( next );
+		ds.insert( r );
+		return( r );
+	}
 
 	
 }

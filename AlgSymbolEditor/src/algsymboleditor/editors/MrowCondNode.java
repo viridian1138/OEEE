@@ -27,48 +27,62 @@
 
 
 
-
 package algsymboleditor.editors;
 
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating a renderable version of an mrow.
+ * Node indicating the end of a MathML mrow.
  * @author tgreen
  *
  */
-public class MrowRendNode extends ParseRendNode {
-	
+public class MrowCondNode extends ParseNode {
 	
 	protected ArrayList<ParseRendNode> lst;
 
+	/**
+	 * Constructs the node.
+	 * @param _parseValue The parsed token.
+	 * @param _next The next node in the list.
+	 */
+	public MrowCondNode(ParseNode _next) {
+		super(_next);
+		lst = new ArrayList<ParseRendNode>();
+	}
 	
-	public MrowRendNode(  ArrayList<ParseRendNode> _lst, ParseNode _next) {
+	
+	public MrowCondNode(  ArrayList<ParseRendNode> _lst, ParseNode _next) {
 		super(_next);
 		lst = _lst;
 	}
-
 	
-	@Override
-	public void draw(Graphics2D g, int xoff, int yoff) {
-		int x = xoff;
-		final int sz = lst.size();
-		for( int cnt = 0 ; cnt < sz ; cnt++ )
-		{
-			lst.get( cnt ).draw(g, x, yoff);
-			x += 15;
-		}
+	
+	public MrowCondNode applyParseRend( ParseRendNode node , DroolsSession ds )
+	{
+		ArrayList<ParseRendNode> ilst = new ArrayList<ParseRendNode>( lst );
+		ilst.add( node );
+		MrowCondNode r = new MrowCondNode( ilst , null );
+		r.next = node.next;
+		ds.insert( r );
+		return( r );
+	}
+	
+	
+	public MrowRendNode applyMrowEnd( MrowEndNode node , DroolsSession ds )
+	{
+		MrowRendNode r = new MrowRendNode( lst , node.next );
+		ds.insert( r );
+		return( r );
 	}
 	
 	
 	@Override
 	public ParseNode applyReng( ParseNode nxt , DroolsSession ds )
 	{
-		MrowRendNode p0 = new MrowRendNode( lst , nxt );
+		MrowCondNode p0 = new MrowCondNode( lst , nxt );
 		ds.insert( p0 );
 		return( p0 );
 	}

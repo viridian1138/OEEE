@@ -225,3 +225,55 @@ end
 
 
 
+rule "Mrow Cond Node"
+     when
+          p0 : MrowCondNode( )
+          p1 : ParseRendNode( ) from p0.next;
+          not( ParseReng( strt == p0 ) )
+          not( ParseReng( strt == p1 ) )
+          ds : DroolsSession()
+     then
+//          System.out.println( "Mrow Cond Node " + p0 );
+          insert( new ParseReng( p0 , p0.applyParseRend( p1 , ds ) ) );
+end
+
+
+
+
+
+
+
+rule "Mrow End Node"
+     when
+          p0 : MrowCondNode( )
+          p1 : MrowEndNode( ) from p0.next;
+          not( ParseReng( strt == p0 ) )
+          not( ParseReng( strt == p1 ) )
+          ds : DroolsSession()
+     then
+//          System.out.println( "Mrow End Node " + p0 );
+          insert( new ParseReng( p0 , p0.applyMrowEnd( p1 , ds ) ) );
+end
+
+
+
+
+
+
+
+rule "Mrow Start Node"
+     when
+          p0 : MrowStartNode( )
+          not( ParseReng( strt == p0 ) )
+          ds : DroolsSession()
+     then
+//          System.out.println( "Mrow Start Node " + p0 );
+          insert( new ParseReng( p0 , p0.applyMrowStart( ds ) ) );
+end
+
+
+
+
+
+
+
