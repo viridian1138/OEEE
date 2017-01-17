@@ -25,6 +25,17 @@
       </editor>
    </extension>
    <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="Algebra Fenced Editor"
+            extensions="algfenced"
+            icon="icons/sample.gif"
+            contributorClass="algsymboleditor.editors.FencedEditorContributor"
+            class="algsymboleditor.editors.FencedEditor"
+            id="algsymboleditor.editors.FencedEditor">
+      </editor>
+   </extension>
+   <extension
          point="org.eclipse.ui.newWizards">
       <category
             name="Algebra Symbol Wizard"
@@ -50,6 +61,20 @@
             category="Algebra Quotient Editor"
             class="algsymboleditor.wizards.NewQuotientWizard"
             id="algsymboleditor.wizards.NewQuotientWizard">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="Algebra Fenced Wizard"
+            id="Algebra Fenced Editor">
+      </category>
+      <wizard
+            name="Algebra Fenced"
+            icon="icons/sample.gif"
+            category="Algebra Fenced Editor"
+            class="algsymboleditor.wizards.NewFencedWizard"
+            id="algsymboleditor.wizards.NewFencedWizard">
       </wizard>
    </extension>
 
