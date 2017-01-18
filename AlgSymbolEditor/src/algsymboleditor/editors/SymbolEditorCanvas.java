@@ -591,14 +591,6 @@ public class SymbolEditorCanvas extends JPanel implements Scrollable {
 			nxt = nxt.next;
 		}
 		
-		
-		Path2D.Double p = new Path2D.Double();
-		
-		p.moveTo( 30.0 , 30.0 );
-		p.curveTo( 50.0 , 70.0 , 50.0 , 70.0 , 70.0 , 70.0 );
-		
-		g.draw( p );
-		
 	}
 	
 	

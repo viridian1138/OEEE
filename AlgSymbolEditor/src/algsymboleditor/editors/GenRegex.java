@@ -321,6 +321,83 @@ public class GenRegex {
 		
 		
 		
+		
+		map.put( new FlexString( "<mfenced open=\"(\" close=\")\">" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ParseNode anode = pnode;
+				pnode = new MfencedStartNode( MfencedRendNode.RendMode.CIRC , null );
+				anode.next = pnode;
+				lnode = null;
+			}
+		});
+		
+		
+		
+		map.put( new FlexString( "<mfenced open=\"[\" close=\"]\">" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ParseNode anode = pnode;
+				pnode = new MfencedStartNode( MfencedRendNode.RendMode.SQUARE , null );
+				anode.next = pnode;
+				lnode = null;
+			}
+		});
+		
+		
+		
+		map.put( new FlexString( "<mfenced open=\"{\" close=\"}\">" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ParseNode anode = pnode;
+				pnode = new MfencedStartNode( MfencedRendNode.RendMode.CURLY , null );
+				anode.next = pnode;
+				lnode = null;
+			}
+		});
+		
+		
+		
+		map.put( new FlexString( "<mfenced open=\"|\" close=\"|\">" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ParseNode anode = pnode;
+				pnode = new MfencedStartNode( MfencedRendNode.RendMode.VERT , null );
+				anode.next = pnode;
+				lnode = null;
+			}
+		});
+		
+		
+		
+		map.put( new FlexString( "</mfenced>" ) , 
+				new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				ParseNode anode = pnode;
+				pnode = new MfencedEndNode( null );
+				anode.next = pnode;
+				lnode = null;
+			}
+		});
+		
+		
+		
+		
 		map.put( new FlexString( "</mi>" ) , 
 				new Runnable()
 		{

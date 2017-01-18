@@ -225,6 +225,26 @@ end
 
 
 
+rule "Mfenced Node"
+     when
+          p0 : MfencedStartNode( )
+          p1 : ParseRendNode( ) from p0.next;
+          p2 : MfencedEndNode( ) from p1.next
+          not( ParseReng( strt == p0 ) )
+          not( ParseReng( strt == p1 ) )
+          not( ParseReng( strt == p2 ) )
+          ds : DroolsSession()
+     then
+//          System.out.println( "Mfenced Node " + p0 );
+          insert( new ParseReng( p0 , p0.applyParse( p1 , p2 , ds ) ) );
+end
+
+
+
+
+
+
+
 rule "Mrow Cond Node"
      when
           p0 : MrowCondNode( )

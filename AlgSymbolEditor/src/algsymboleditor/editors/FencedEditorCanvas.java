@@ -92,7 +92,7 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 		/**
 		 * Overscript insert.
 		 */
-		OVERSCRIPT_MODE
+		CIRC_MODE
 		{
 			@Override
 			void insertStringSwing( String str , FencedEditorCanvas canvas )
@@ -117,12 +117,18 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 			{
 				AlgCommon.performDelete( canvas.swtFencescriptLst );
 			}
+
+			@Override
+			String getTypeString() {
+				return( "<mfenced open=\"(\" close=\")\">" );
+			}
+			
 		},
 		
 		/**
 		 * Underscript insert.
 		 */
-		UNDERSCRIPT_MODE
+		SQUARE_MODE
 		{
 			@Override
 			void insertStringSwing( String str , FencedEditorCanvas canvas )
@@ -146,6 +152,83 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 			void deleteSymSwt( FencedEditorCanvas canvas )
 			{
 				AlgCommon.performDelete( canvas.swtFencescriptLst );
+			}
+			
+			@Override
+			String getTypeString() {
+				return( "<mfenced open=\"[\" close=\"]\">" );
+			}
+			
+		},
+		
+		/**
+		 * Underscript insert.
+		 */
+		CURLY_MODE
+		{
+			@Override
+			void insertStringSwing( String str , FencedEditorCanvas canvas )
+			{
+				AlgCommon.performLstInsert( str, canvas.swingFencescriptLst );
+			}
+			
+			@Override
+			void deleteSymSwing( FencedEditorCanvas canvas )
+			{
+				AlgCommon.performDelete( canvas.swingFencescriptLst );
+			}
+			
+			@Override
+			void insertStringSwt( String str , FencedEditorCanvas canvas )
+			{
+				AlgCommon.performLstInsert( str, canvas.swtFencescriptLst );
+			}
+			
+			@Override
+			void deleteSymSwt( FencedEditorCanvas canvas )
+			{
+				AlgCommon.performDelete( canvas.swtFencescriptLst );
+			}
+			
+			@Override
+			String getTypeString() {
+				return( "<mfenced open=\"{\" close=\"}\">" );
+			}
+			
+		},
+		
+		/**
+		 * Underscript insert.
+		 */
+		VERT_MODE
+		{
+			@Override
+			void insertStringSwing( String str , FencedEditorCanvas canvas )
+			{
+				AlgCommon.performLstInsert( str, canvas.swingFencescriptLst );
+			}
+			
+			@Override
+			void deleteSymSwing( FencedEditorCanvas canvas )
+			{
+				AlgCommon.performDelete( canvas.swingFencescriptLst );
+			}
+			
+			@Override
+			void insertStringSwt( String str , FencedEditorCanvas canvas )
+			{
+				AlgCommon.performLstInsert( str, canvas.swtFencescriptLst );
+			}
+			
+			@Override
+			void deleteSymSwt( FencedEditorCanvas canvas )
+			{
+				AlgCommon.performDelete( canvas.swtFencescriptLst );
+			}
+			
+			@Override
+			String getTypeString() {
+				return( "<mfenced open=\"|\" close=\"|\">" );
 			}
 			
 		};
@@ -176,6 +259,9 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 		 * @param canvas The canvas on which to delete the symbol.
 		 */
 		abstract void deleteSymSwt( FencedEditorCanvas canvas );
+		
+		
+		abstract String getTypeString();
 		
 		
 	};
@@ -337,7 +423,9 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	/**
 	 * The current insertion mode on the Swing thread.
 	 */
-	protected InsertModes swingInsertMode = InsertModes.OVERSCRIPT_MODE;
+	protected InsertModes swingInsertMode = InsertModes.CIRC_MODE;
+	
+	protected InsertModes swtInsertMode = InsertModes.CIRC_MODE;
 	
 	/**
 	 * The current Overarch Insert mode on the Swing thread.
@@ -457,14 +545,6 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 			nxt = nxt.next;
 		}
 		
-		
-		Path2D.Double p = new Path2D.Double();
-		
-		p.moveTo( 30.0 , 30.0 );
-		p.curveTo( 50.0 , 70.0 , 50.0 , 70.0 , 70.0 , 70.0 );
-		
-		g.draw( p );
-		
 	}
 	
 	
@@ -549,6 +629,11 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	public void handleInsertModeSwing( InsertModes in )
 	{
 		swingInsertMode = in;
+		
+		updateSwingDisplayString();
+		
+		repaint();
+		updateSwtInsertMode( swingInsertMode );
 	}
 	
 	
@@ -567,7 +652,7 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	 */
 	protected void updateSwingDisplayString()
 	{
-		swingDisplayString = genDisplayString( swingFencescriptLst );
+		swingDisplayString = genDisplayString( swingFencescriptLst , swingInsertMode );
 		ParseNode pnode = genRegex.parse( swingDisplayString );
 		
 		try
@@ -675,6 +760,24 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	}
 	
 	
+	
+	protected void updateSwtInsertMode( final InsertModes insertMode  )
+	{
+		if( display != null )
+		{
+			display.asyncExec( new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					swtInsertMode = insertMode;
+				}
+			} );
+		}
+	}
+	
+	
+	
 	/**
 	 * Handles a request to initialize on the SWT thread.
 	 * @param overscriptLst The overscript list.
@@ -703,7 +806,7 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	 * @param overscriptLst The overscript list.
 	 * @return The output string in which to insert.
 	 */
-	protected static FlexString genDisplayString( final HighLevelList<StdLowLevelList<FlexString>,FlexString> fencedscriptLst )
+	protected static FlexString genDisplayString( final HighLevelList<StdLowLevelList<FlexString>,FlexString> fencedscriptLst , final InsertModes typeMode )
 		{
 		
 			final boolean fenceds = fencedscriptLst.empty();
@@ -713,7 +816,7 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 			ret.setInsertPoint( 0 );
 			
 			
-			ret.insertJavaString( "<mfenced>" );
+			ret.insertJavaString( typeMode.getTypeString() );
 			
 			
 			if( fenceds )
@@ -829,7 +932,7 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	public void handleCopySwt( Clipboard clipboard )
 	{
 		TextTransfer transfer;
-		final FlexString swtStr = genDisplayString( swtFencescriptLst );
+		final FlexString swtStr = genDisplayString( swtFencescriptLst , swtInsertMode );
 		final String[] data = { AlgCommon.MATCH_STR + swtStr.exportString() };
 		System.out.println( data );
 		clipboard.setContents( data /* new Object[] { data } */ , 

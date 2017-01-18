@@ -50,8 +50,10 @@ import org.eclipse.ui.part.MultiPageEditorActionBarContributor;
 public class FencedEditorContributor extends MultiPageEditorActionBarContributor {
 	private IEditorPart activeEditorPart;
 	
-	private Action overscriptAction;
-	private Action underscriptAction;
+	private Action circAction;
+	private Action squareAction;
+	private Action curlyAction;
+	private Action vertAction;
 	private Action dumpTextToConsoleAction;
 	
 	private Action overarchInsertDefaultAction;
@@ -215,26 +217,48 @@ public class FencedEditorContributor extends MultiPageEditorActionBarContributor
 	 */
 	private void createActions() {
 		
-		overscriptAction = new Action() {
+		circAction = new Action() {
 			@Override
 			public void run() {
-				handleInsertMode( FencedEditorCanvas.InsertModes.OVERSCRIPT_MODE );
+				handleInsertMode( FencedEditorCanvas.InsertModes.CIRC_MODE );
 			}
 		};
-		overscriptAction.setText("Overscript");
-		overscriptAction.setToolTipText("Overscript Mode");
-		overscriptAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
+		circAction.setText("Circular Paren");
+		circAction.setToolTipText("Circular Paren");
+		circAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
 				getImageDescriptor(IDE.SharedImages.IMG_OBJS_TASK_TSK));
 		
-		underscriptAction = new Action() {
+		squareAction = new Action() {
 			@Override
 			public void run() {
-				handleInsertMode( FencedEditorCanvas.InsertModes.UNDERSCRIPT_MODE );
+				handleInsertMode( FencedEditorCanvas.InsertModes.SQUARE_MODE );
 			}
 		};
-		underscriptAction.setText("Underscript");
-		underscriptAction.setToolTipText("Underscript Mode");
-		underscriptAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
+		squareAction.setText("Square Paren");
+		squareAction.setToolTipText("Square Paren");
+		squareAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
+				getImageDescriptor(IDE.SharedImages.IMG_OBJS_TASK_TSK));
+		
+		curlyAction = new Action() {
+			@Override
+			public void run() {
+				handleInsertMode( FencedEditorCanvas.InsertModes.CURLY_MODE );
+			}
+		};
+		curlyAction.setText("Curly Brace");
+		curlyAction.setToolTipText("Curly Brace");
+		curlyAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
+				getImageDescriptor(IDE.SharedImages.IMG_OBJS_TASK_TSK));
+		
+		vertAction = new Action() {
+			@Override
+			public void run() {
+				handleInsertMode( FencedEditorCanvas.InsertModes.VERT_MODE );
+			}
+		};
+		vertAction.setText("Vertical Brace");
+		vertAction.setToolTipText("Vertical Brace");
+		vertAction.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
 				getImageDescriptor(IDE.SharedImages.IMG_OBJS_TASK_TSK));
 		
 		dumpTextToConsoleAction = new Action() {
@@ -1044,10 +1068,12 @@ public class FencedEditorContributor extends MultiPageEditorActionBarContributor
 		overarchInsertMenu.add( overarchInsertOperatorAction );
 		overarchInsertMenu.add( overarchInsertNumberAction );
 		
-		IMenuManager symbolMenu = new MenuManager("Symbol");
+		IMenuManager symbolMenu = new MenuManager("Paren");
 		manager.prependToGroup(IWorkbenchActionConstants.MB_ADDITIONS, symbolMenu);
-		symbolMenu.add(overscriptAction);
-		symbolMenu.add(underscriptAction);
+		symbolMenu.add(circAction);
+		symbolMenu.add(squareAction);
+		symbolMenu.add(curlyAction);
+		symbolMenu.add(vertAction);
 		symbolMenu.add( new Separator() );
 		symbolMenu.add(dumpTextToConsoleAction);
 		
