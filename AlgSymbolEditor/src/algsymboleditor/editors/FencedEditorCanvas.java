@@ -73,7 +73,7 @@ import meta.*;
 
 
 /**
- * Canvas for rendering Fenced edits.
+ * Canvas for rendering edits of mfenced entities.
  * 
  * @author tgreen
  *
@@ -90,7 +90,7 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	{
 		
 		/**
-		 * Overscript insert.
+		 * Circular paren insert.
 		 */
 		CIRC_MODE
 		{
@@ -126,7 +126,7 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 		},
 		
 		/**
-		 * Underscript insert.
+		 * Square paren insert.
 		 */
 		SQUARE_MODE
 		{
@@ -162,7 +162,7 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 		},
 		
 		/**
-		 * Underscript insert.
+		 * Curly brace insert.
 		 */
 		CURLY_MODE
 		{
@@ -198,7 +198,7 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 		},
 		
 		/**
-		 * Underscript insert.
+		 * Vertical brace insert.
 		 */
 		VERT_MODE
 		{
@@ -260,7 +260,10 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 		 */
 		abstract void deleteSymSwt( FencedEditorCanvas canvas );
 		
-		
+		/**
+		 * Returns the markup string for the insertion type.
+		 * @return The markup string.
+		 */
 		abstract String getTypeString();
 		
 		
@@ -425,6 +428,9 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	 */
 	protected InsertModes swingInsertMode = InsertModes.CIRC_MODE;
 	
+	/**
+	 * The current insertion mode on the SWT thread.
+	 */
 	protected InsertModes swtInsertMode = InsertModes.CIRC_MODE;
 	
 	/**
@@ -760,7 +766,10 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	}
 	
 	
-	
+	/**
+	 * Handles a request to update the insert mode on the SWT thread.
+	 * @param insertMode The input insert mode.
+	 */
 	protected void updateSwtInsertMode( final InsertModes insertMode  )
 	{
 		if( display != null )

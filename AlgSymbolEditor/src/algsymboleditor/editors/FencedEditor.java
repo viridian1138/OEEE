@@ -85,7 +85,7 @@ import org.eclipse.ui.part.FileEditorInput;
 
 
 /**
- * Editor for MathML Fenceds.
+ * Editor for MathML Mfenced entities.
  * @author tgreen
  *
  */
@@ -93,7 +93,7 @@ public class FencedEditor extends EditorPart implements IInitiateMarkDirty {
 	
 	
 	/**
-	 * Canvas for rendering the Fenced.
+	 * Canvas for rendering the mfenced
 	 */
 	protected FencedEditorCanvas canvas = null;
 

@@ -33,18 +33,20 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating the end of a MathML mrow.
+ * Node indicating the end of a MathML mfenced production..
  * @author tgreen
  *
  */
 public class MfencedStartNode extends ParseNode {
 	
-	
+	/**
+	 * The rendering mode for the mfenced entity.
+	 */
 	protected MfencedRendNode.RendMode rendMode;
 
 	/**
 	 * Constructs the node.
-	 * @param _parseValue The parsed token.
+	 * @param _rendMode The rendering mode for the mfenced entity.
 	 * @param _next The next node in the list.
 	 */
 	public MfencedStartNode( MfencedRendNode.RendMode _rendMode , ParseNode _next) {
@@ -52,7 +54,13 @@ public class MfencedStartNode extends ParseNode {
 		rendMode = _rendMode;
 	}
 	
-	
+	/**
+	 * Applies the parsing of an mfenced production.
+	 * @param script The node enclosed in the parsed mfenced production.
+	 * @param endNode The production indicating the end of the mfenced.
+	 * @param ds The Drools session.
+	 * @return The constructed rendering node.
+	 */
 	public MfencedRendNode applyParse( ParseRendNode script , ParseNode endNode , DroolsSession ds )
 	{
 		MfencedRendNode r = new MfencedRendNode( script , rendMode );
