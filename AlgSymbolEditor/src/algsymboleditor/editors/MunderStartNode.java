@@ -33,7 +33,7 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating the end of a MathML mrow.
+ * Node indicating the start of a MathML underscript production.
  * @author tgreen
  *
  */
@@ -41,7 +41,6 @@ public class MunderStartNode extends ParseNode {
 
 	/**
 	 * Constructs the node.
-	 * @param _parseValue The parsed token.
 	 * @param _next The next node in the list.
 	 */
 	public MunderStartNode(ParseNode _next) {
@@ -49,9 +48,17 @@ public class MunderStartNode extends ParseNode {
 	}
 	
 	
-	public MunderRendNode applyParse( ParseRendNode script , ParseRendNode superscript , ParseNode endNode , DroolsSession ds )
+	/**
+	 * Applies the parsing of an underscript production.
+	 * @param script The parsed script production.
+	 * @param underscript The parsed underscript production.
+	 * @param endNode The end terminal of the underscript.
+	 * @param ds The Drools session.
+	 * @return The rendering node for the parsed production.
+	 */
+	public MunderRendNode applyParse( ParseRendNode script , ParseRendNode underscript , ParseNode endNode , DroolsSession ds )
 	{
-		MunderRendNode r = new MunderRendNode( script , superscript );
+		MunderRendNode r = new MunderRendNode( script , underscript );
 		r.next = endNode.next;
 		ds.insert( r );
 		return( r );

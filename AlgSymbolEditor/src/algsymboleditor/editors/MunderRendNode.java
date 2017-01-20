@@ -36,37 +36,44 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating a renderable version of an mrow.
+ * Node indicating a renderable version of an underscript production.
  * @author tgreen
  *
  */
 public class MunderRendNode extends ParseRendNode {
 	
+	/**
+	 * The parsed script production.
+	 */
 	protected ParseRendNode script;
-	protected ParseRendNode subscript;
+	
+	/**
+	 * The parsed underscript production.
+	 */
+	protected ParseRendNode underscript;
 
 	/**
 	 * Constructs the node.
-	 * @param _parseValue The parsed token.
-	 * @param _next The next node in the list.
+	 * @param _script The parsed script production.
+	 * @param _underscript The parsed underscript production.
 	 */
-	public MunderRendNode( ParseRendNode a, ParseRendNode b) {
-		super( b.next );
-		script = a;
-		subscript = b;
+	public MunderRendNode( ParseRendNode _script, ParseRendNode _underscript ) {
+		super( _underscript.next );
+		script = _script;
+		underscript = _underscript;
 	}
 
 	@Override
 	public void draw(Graphics2D g, int xoff, int yoff) {
 		script.draw(g, xoff, yoff);
-		subscript.draw(g, xoff, yoff + 15);
+		underscript.draw(g, xoff, yoff + 15);
 	}
 	
 	
 	@Override
 	public ParseNode applyReng( ParseNode nxt , DroolsSession ds )
 	{
-		MunderRendNode p0 = new MunderRendNode( script , subscript );
+		MunderRendNode p0 = new MunderRendNode( script , underscript );
 		p0.next = nxt;
 		ds.insert( p0 );
 		return( p0 );

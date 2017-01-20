@@ -47,7 +47,12 @@ public abstract class ParseRendNode extends ParseNode {
 		super(_next);
 	}
 	
-	
+	/**
+	 * Draws the RendNode.
+	 * @param g The graphics context in which to draw.
+	 * @param xoff The X-offset at which to draw.
+	 * @param yoff The Y-offset at which to draw.
+	 */
 	public abstract void draw( Graphics2D g , int xoff , int yoff );
 
 	

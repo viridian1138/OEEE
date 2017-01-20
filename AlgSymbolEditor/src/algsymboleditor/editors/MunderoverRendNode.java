@@ -36,26 +36,37 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating a renderable version of an mrow.
+ * Node indicating a renderable version of an underscript-overscript production.
  * @author tgreen
  *
  */
 public class MunderoverRendNode extends ParseRendNode {
 	
+	/**
+	 * The parsed script production.
+	 */
 	protected ParseRendNode script;
+	
+	/**
+	 * The parsed underscript production.
+	 */
 	protected ParseRendNode underscript;
+	
+	/**
+	 * The parsed overscript production.
+	 */
 	protected ParseRendNode overscript;
 
 	/**
 	 * Constructs the node.
-	 * @param _parseValue The parsed token.
-	 * @param _next The next node in the list.
+	 * @param _script The parsed script production.
+	 * @param _underscript The parsed underscript production.
 	 */
-	public MunderoverRendNode( ParseRendNode a, ParseRendNode b, ParseRendNode c) {
-		super( c.next );
-		script = a;
-		underscript = b;
-		overscript = c;
+	public MunderoverRendNode( ParseRendNode _script, ParseRendNode _underscript, ParseRendNode _overscript ) {
+		super( _overscript.next );
+		script = _script;
+		underscript = _underscript;
+		overscript = _overscript;
 	}
 
 	@Override

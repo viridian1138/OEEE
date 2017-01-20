@@ -33,7 +33,7 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating the end of a MathML mrow.
+ * Node indicating the end of a MathML superscript production.
  * @author tgreen
  *
  */
@@ -41,7 +41,6 @@ public class MsupStartNode extends ParseNode {
 
 	/**
 	 * Constructs the node.
-	 * @param _parseValue The parsed token.
 	 * @param _next The next node in the list.
 	 */
 	public MsupStartNode(ParseNode _next) {
@@ -49,6 +48,14 @@ public class MsupStartNode extends ParseNode {
 	}
 	
 	
+	/**
+	 * Applies the parsing of a superscript production.
+	 * @param script The parsed script production.
+	 * @param superscript The parsed superscript production.
+	 * @param endNode The end terminal of the superscript.
+	 * @param ds The Drools session.
+	 * @return The rendering node for the parsed production.
+	 */
 	public MsupRendNode applyParse( ParseRendNode script , ParseRendNode superscript , ParseNode endNode , DroolsSession ds )
 	{
 		MsupRendNode r = new MsupRendNode( script , superscript );
