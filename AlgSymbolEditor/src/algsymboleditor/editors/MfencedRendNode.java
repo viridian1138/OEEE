@@ -41,16 +41,24 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating a renderable version of an mrow.
+ * Node indicating a renderable version of an mfenced production.
  * @author tgreen
  *
  */
 public class MfencedRendNode extends ParseRendNode {
 	
 	
+	/**
+	 * The rendering mode for the mfenced production.
+	 * @author tgreen
+	 *
+	 */
 	public static enum RendMode
 	{
 		
+		/**
+		 * Mode for circular parenthesis.
+		 */
 		CIRC
 		{
 
@@ -62,19 +70,35 @@ public class MfencedRendNode extends ParseRendNode {
 				
 				Path2D.Double p = new Path2D.Double();
 				
-				p.moveTo( xoff + 5 , yoff - 10 );
-				p.curveTo( xoff , yoff - 5 , xoff , yoff + 5 , xoff + 5 , yoff + 10 );
+				Rectangle2D.Double ir = rend.getImgRect();
 				
-				p.moveTo( xoff + 25 , yoff - 10 );
-				p.curveTo( xoff + 30 , yoff - 5 , xoff + 30 , yoff + 5 , xoff + 25 , yoff + 10 );
+				p.moveTo( ir.x + xoff + 6 , ir.y + yoff + 1 );
+				p.curveTo( ir.x + xoff + 1 , ir.y + yoff + 6 , 
+							ir.x + xoff + 1 , ir.y + ir.height + yoff - 6 , 
+							ir.x + xoff + 6 , ir.y + ir.height + yoff - 1 );
+				
+				p.moveTo( ir.x + ir.width + xoff - 6 , ir.y + yoff + 1 );
+				p.curveTo( ir.x + ir.width + xoff - 1 , ir.y + yoff + 6 , 
+							ir.x + ir.width + xoff - 1 , ir.y + ir.height + yoff - 6 , 
+							ir.x + ir.width + xoff - 6 , ir.y + ir.height + yoff - 1 );
 				
 				g.draw( p );
 				
+			}
+			
+			
+			@Override
+			public double getDelx()
+			{
+				return( 7.0 );
 			}
 
 	
 			
 		},
+		/**
+		 * Mode for a square bracket.
+		 */
 		SQUARE
 		{
 
@@ -86,23 +110,35 @@ public class MfencedRendNode extends ParseRendNode {
 				
 				Path2D.Double p = new Path2D.Double();
 				
-				p.moveTo( xoff + 5 , yoff - 10 );
-				p.lineTo( xoff , yoff - 10 );
-				p.lineTo( xoff , yoff + 10 );
-				p.lineTo( xoff + 5 , yoff + 10 );
+				Rectangle2D.Double ir = rend.getImgRect();
 				
-				p.moveTo( xoff + 25 , yoff - 10 );
-				p.lineTo( xoff + 30 , yoff - 10 );
-				p.lineTo( xoff + 30 , yoff + 10 );
-				p.lineTo( xoff + 25 , yoff + 10 );
+				p.moveTo( ir.x + xoff + 6 , ir.y + yoff + 1 );
+				p.lineTo( ir.x + xoff + 1 , ir.y + yoff + 1 );
+				p.lineTo( ir.x + xoff + 1 , ir.y + ir.height + yoff - 1 );
+				p.lineTo( ir.x + xoff + 6 , ir.y + ir.height + yoff - 1 );
+				
+				p.moveTo( ir.x + ir.width + xoff - 6 , ir.y + yoff + 1 );
+				p.lineTo( ir.x + ir.width + xoff - 1 , ir.y + yoff + 1 );
+				p.lineTo( ir.x + ir.width + xoff - 1 , ir.y + ir.height + yoff - 1 );
+				p.lineTo( ir.x + ir.width + xoff - 6 , ir.y + ir.height + yoff - 1 );
 				
 				g.draw( p );
 				
+			}
+			
+			
+			@Override
+			public double getDelx()
+			{
+				return( 5.0 );
 			}
 
 
 			
 		},
+		/**
+		 * Mode for a curly brace.
+		 */
 		CURLY
 		{
 
@@ -133,10 +169,20 @@ public class MfencedRendNode extends ParseRendNode {
 				g.draw( p );
 				
 			}
+			
+			
+			@Override
+			public double getDelx()
+			{
+				return( 5.0 );
+			}
 
 
 			
 		},
+		/**
+		 * Mode for a vertical brace.
+		 */
 		VERT
 		{
 
@@ -148,37 +194,66 @@ public class MfencedRendNode extends ParseRendNode {
 				
 				Path2D.Double p = new Path2D.Double();
 				
-				p.moveTo( xoff + 5 , yoff - 10 );
-				p.lineTo( xoff + 5 , yoff + 10 );
+				Rectangle2D.Double ir = rend.getImgRect();
 				
-				p.moveTo( xoff + 25 , yoff - 10 );
-				p.lineTo( xoff + 25 , yoff + 10 );
+				p.moveTo( ir.x + xoff + 1 , ir.y + yoff + 1 );
+				p.lineTo( ir.x + xoff + 1 , ir.y + ir.height + yoff - 1 );
+				
+				p.moveTo( ir.x + ir.width + xoff - 1 , ir.y + yoff + 1 );
+				p.lineTo( ir.x + ir.width + xoff - 1 , ir.y + ir.height + yoff - 1 );
 				
 				g.draw( p );
 				
+			}
+			
+			
+			@Override
+			public double getDelx()
+			{
+				return( 5.0 );
 			}
 
 
 			
 		};
 		
+		/**
+		 * Drwas the mfenced production.
+		 * @param rend The parsed production to render.
+		 * @param g The graphics context in which to render.
+		 * @param xoff The X-Axis offset.
+		 * @param yoff The Y-Axis offset.
+		 */
 		public abstract void draw( MfencedRendNode rend , Graphics2D g , double xoff , double yoff);
+		
+		/**
+		 * Gets the horizontal spacing for the mode.
+		 * @return The horizontal spacing for the mode.
+		 */
+		public abstract double getDelx();
 		
 	};
 	
+	/**
+	 * The parsed production for the script that is inside the mfenced production.
+	 */
 	protected ParseRendNode script;
 	
+	/**
+	 * The rendering mode for the mfenced production.
+	 */
 	protected RendMode rendMode;
 
+	
 	/**
 	 * Constructs the node.
-	 * @param _parseValue The parsed token.
-	 * @param _next The next node in the list.
+	 * @param _script The parsed production for the script that is inside the mfenced production.
+	 * @param _rendMode The rendering mode for the mfenced production.
 	 */
-	public MfencedRendNode( ParseRendNode a , RendMode c) {
-		super( a.next );
-		script = a;
-		rendMode = c;
+	public MfencedRendNode( ParseRendNode _script , RendMode _rendMode ) {
+		super( _script.next );
+		script = _script;
+		rendMode = _rendMode;
 	}
 
 	@Override
@@ -204,19 +279,16 @@ public class MfencedRendNode extends ParseRendNode {
 		
 		script.calcRects(inFont, fontSz, tempFrc);
 		
-		script.setxOffset( 5.0 );
-		script.setyOffset( 5.0 );
 		
-		connRect = new Rectangle2D.Double( script.getConnRect().x , 
-				script.getConnRect().y , 
-				script.getConnRect().width + 10.0 , 
-				script.getConnRect().height + 10.0 );
+		final double delx = rendMode.getDelx();
 		
-		imgRect = new Rectangle2D.Double( script.getImgRect().x , 
-				script.getImgRect().y , 
-				script.getImgRect().width + 10.0 , 
+		
+		imgRect = new Rectangle2D.Double( script.getImgRect().x - delx , 
+				script.getImgRect().y - 5.0 , 
+				script.getImgRect().width + 2.0 * delx , 
 				script.getImgRect().height + 10.0 );
 		
+		connRect = imgRect;
 		
 	}
 
