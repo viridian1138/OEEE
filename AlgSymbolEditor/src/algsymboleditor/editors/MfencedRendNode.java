@@ -150,21 +150,23 @@ public class MfencedRendNode extends ParseRendNode {
 				
 				Path2D.Double p = new Path2D.Double();
 				
-				p.moveTo( xoff + 5 , yoff - 10 );
-				p.lineTo( xoff , yoff - 10 );
-				p.lineTo( xoff , yoff - 3 );
-				p.lineTo( xoff - 5 , yoff );
-				p.lineTo( xoff , yoff + 3 );
-				p.lineTo( xoff , yoff + 10 );
-				p.lineTo( xoff + 5 , yoff + 10 );
+				Rectangle2D.Double ir = rend.getImgRect();
 				
-				p.moveTo( xoff + 25 , yoff - 10 );
-				p.lineTo( xoff + 30 , yoff - 10 );
-				p.lineTo( xoff + 30 , yoff - 3 );
-				p.lineTo( xoff + 35 , yoff );
-				p.lineTo( xoff + 30 , yoff + 3 );
-				p.lineTo( xoff + 30 , yoff + 10 );
-				p.lineTo( xoff + 25 , yoff + 10 );
+				p.moveTo( ir.x + xoff + 11 , ir.y + yoff + 1 );
+				p.lineTo( ir.x + xoff + 6 , ir.y + yoff + 1 );
+				p.lineTo( ir.x + xoff + 6 , ir.y + ( ir.height / 2.0 ) + yoff - 3 );
+				p.lineTo( ir.x + xoff + 1 , ir.y + ( ir.height / 2.0 ) + yoff );
+				p.lineTo( ir.x + xoff + 6 , ir.y + ( ir.height / 2.0 ) + yoff + 3 );
+				p.lineTo( ir.x + xoff + 6 , ir.y + ir.height + yoff - 1 );
+				p.lineTo( ir.x + xoff + 11 , ir.y + ir.height + yoff - 1 );
+				
+				p.moveTo( ir.x + ir.width + xoff - 11 , ir.y + yoff + 1 );
+				p.lineTo( ir.x + ir.width + xoff - 6 , ir.y + yoff + 1 );
+				p.lineTo( ir.x + ir.width + xoff - 6 , ir.y + ( ir.height / 2.0 ) + yoff - 3 );
+				p.lineTo( ir.x + ir.width + xoff - 1 , ir.y + ( ir.height / 2.0 ) + yoff );
+				p.lineTo( ir.x + ir.width + xoff - 6 , ir.y + ( ir.height / 2.0 ) + yoff + 3 );
+				p.lineTo( ir.x + ir.width + xoff - 6 , ir.y + ir.height + yoff - 1 );
+				p.lineTo( ir.x + ir.width + xoff - 11 , ir.y + ir.height + yoff - 1 );
 				
 				g.draw( p );
 				
@@ -174,7 +176,7 @@ public class MfencedRendNode extends ParseRendNode {
 			@Override
 			public double getDelx()
 			{
-				return( 5.0 );
+				return( 10.0 );
 			}
 
 
