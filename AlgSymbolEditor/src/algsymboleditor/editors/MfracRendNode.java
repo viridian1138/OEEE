@@ -33,6 +33,7 @@ package algsymboleditor.editors;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.font.FontRenderContext;
+import java.awt.font.LineMetrics;
 import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D.Double;
 import java.util.ArrayList;
@@ -41,24 +42,36 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating a renderable version of an mrow.
+ * Node indicating a renderable version of a quotient fraction production.
  * @author tgreen
  *
  */
 public class MfracRendNode extends ParseRendNode {
 	
+	/**
+	 * The parsed numerator production.
+	 */
 	protected ParseRendNode numer;
+	
+	/**
+	 * The parsed denominator production.
+	 */
 	protected ParseRendNode denom;
+	
+	/**
+	 * The Y-Coordinate at which to draw the quotient line.
+	 */
+	protected double lineY = 0.0;
 
 	/**
 	 * Constructs the node.
-	 * @param _parseValue The parsed token.
-	 * @param _next The next node in the list.
+	 * @param _numer The parsed numerator production.
+	 * @param _denom The parsed denominator production.
 	 */
-	public MfracRendNode( ParseRendNode a, ParseRendNode b) {
-		super( b.next );
-		numer = a;
-		denom = b;
+	public MfracRendNode( ParseRendNode _numer, ParseRendNode _denom ) {
+		super( _denom.next );
+		numer = _numer;
+		denom = _denom;
 	}
 
 	@Override
@@ -68,8 +81,8 @@ public class MfracRendNode extends ParseRendNode {
 		
 		Path2D.Double p = new Path2D.Double();
 		
-		p.moveTo( imgRect.x + xoff + xOffset , numer.getImgRect().y + numer.getImgRect().height + 1.5 + yoff + connRect.y );
-		p.lineTo( imgRect.x + imgRect.width + xoff + xOffset , numer.getImgRect().y + numer.getImgRect().height + 1.5 + yoff + connRect.y );
+		p.moveTo( imgRect.x + xoff + xOffset , lineY + yoff + yOffset );
+		p.lineTo( imgRect.x + imgRect.width + xoff + xOffset , lineY + yoff + yOffset );
 		
 		g.draw( p );
 		
@@ -86,21 +99,27 @@ public class MfracRendNode extends ParseRendNode {
 		numer.calcRects(inFont, fontSz, tempFrc);
 		denom.calcRects(inFont, fontSz, tempFrc);
 		
+		final LineMetrics lm = inFont.getLineMetrics( " " , tempFrc );
+		final double asc2 = -( lm.getAscent() / 2.0 );
+		lineY = asc2;
+		
 		final double cnw = Math.max( numer.getConnRect().width , denom.getConnRect().width );
 		
 		numer.setxOffset( ( cnw - numer.getConnRect().width ) / 2.0 );
 		
-		denom.setxOffset( ( cnw - denom.getConnRect().width ) / 2.0 );
+		 denom.setxOffset( ( cnw - denom.getConnRect().width ) / 2.0 );
 		
-		final double deltaY = ( numer.getImgRect().y + numer.getImgRect().height + 3.0 ) + ( denom.getConnRect().y - denom.getImgRect().y );
-		denom.setyOffset( deltaY );
+		final double deltaYN = -3.0 + asc2 - ( numer.getImgRect().y + numer.getImgRect().height );
+		final double deltaYD = 3.0 + asc2 - denom.getImgRect().y;
+		numer.setyOffset( deltaYN );
+		denom.setyOffset( deltaYD );
 		
 		ArrayList<ParseRendNode> ar = new ArrayList<ParseRendNode>();
 		ar.add( numer );
 		ar.add( denom );
 		
-		connRect = buildConnRect( ar );
 		imgRect = buildImgRect( ar );
+		connRect = imgRect;
 		
 	}
 	

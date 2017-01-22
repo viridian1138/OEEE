@@ -74,7 +74,7 @@ public class MunderoverRendNode extends ParseRendNode {
 
 	@Override
 	public void draw(Graphics2D g, double xoff, double yoff) {
-		script.draw(g, xoff, yoff);
+		script.draw(g, xoff+xOffset, yoff+yOffset);
 		underscript.draw(g, xoff+xOffset, yoff+yOffset);
 		overscript.draw(g, xoff+xOffset, yoff+yOffset);
 	}

@@ -234,20 +234,20 @@ public abstract class ParseRendNode extends ParseNode {
 		if( overscriptLex == null ) overscriptLex = simpLexeme();
 		if( underscriptLex == null ) underscriptLex = simpLexeme();
 
-		Font SFont = smlFont( inFont , altFontSize );
+		Font sFont = smlFont( inFont , altFontSize );
 		double leading = 0.0;
 		if( /* ( TempMode & MathImageConstants.ParseOnlyMode ) == 0 */ true )
 			{
-			LineMetrics lm = SFont.getLineMetrics( " " , tempFrc );
+			LineMetrics lm = sFont.getLineMetrics( " " , tempFrc );
 			leading = lm.getLeading();
 			}
 		
 		
 		scriptLex.calcRects(inFont, origFontSz, tempFrc);
-		superscriptLex.calcRects(SFont, altFontSize, tempFrc);
-		subscriptLex.calcRects(SFont, altFontSize, tempFrc);
-		overscriptLex.calcRects(SFont, altFontSize, tempFrc);
-		underscriptLex.calcRects(SFont, altFontSize, tempFrc);
+		superscriptLex.calcRects(sFont, altFontSize, tempFrc);
+		subscriptLex.calcRects(sFont, altFontSize, tempFrc);
+		overscriptLex.calcRects(sFont, altFontSize, tempFrc);
+		underscriptLex.calcRects(sFont, altFontSize, tempFrc);
 		
 
 		double ScriptXOff = 0;

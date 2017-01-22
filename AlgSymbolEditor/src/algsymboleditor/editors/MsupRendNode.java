@@ -67,8 +67,8 @@ public class MsupRendNode extends ParseRendNode {
 
 	@Override
 	public void draw(Graphics2D g, double xoff, double yoff) {
-		script.draw(g, xoff, yoff);
-		superscript.draw(g, xoff + 15, yoff - 15);
+		script.draw(g, xoff + xOffset, yoff + yOffset);
+		superscript.draw(g, xoff + xOffset, yoff + yOffset);
 	}
 	
 	

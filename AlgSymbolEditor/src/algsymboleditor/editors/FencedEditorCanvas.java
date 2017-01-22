@@ -559,6 +559,7 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 					{
 						Font f = gg.getFont();
 						inFont = new Font( f.getName() , f.getStyle() , (int) fontSz );
+						g.setFont( inFont );
 						tempFrc = g.getFontRenderContext();
 					}
 					pr.calcRects(inFont, fontSz, tempFrc);
