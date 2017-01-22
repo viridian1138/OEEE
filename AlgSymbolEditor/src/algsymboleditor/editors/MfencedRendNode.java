@@ -30,8 +30,12 @@
 
 package algsymboleditor.editors;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.font.FontRenderContext;
 import java.awt.geom.Path2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Double;
 
 import simplealgebra.symbolic.DroolsSession;
 
@@ -51,10 +55,10 @@ public class MfencedRendNode extends ParseRendNode {
 		{
 
 			@Override
-			public void draw(MfencedRendNode rend, Graphics2D g, int xoff,
-					int yoff) {
+			public void draw(MfencedRendNode rend, Graphics2D g, double xoff,
+					double yoff) {
 				
-				rend.script.draw(g, xoff + 10 , yoff);
+				rend.script.draw(g, xoff , yoff);
 				
 				Path2D.Double p = new Path2D.Double();
 				
@@ -75,10 +79,10 @@ public class MfencedRendNode extends ParseRendNode {
 		{
 
 			@Override
-			public void draw(MfencedRendNode rend, Graphics2D g, int xoff,
-					int yoff) {
+			public void draw(MfencedRendNode rend, Graphics2D g, double xoff,
+					double yoff) {
 				
-				rend.script.draw(g, xoff + 10 , yoff);
+				rend.script.draw(g, xoff , yoff);
 				
 				Path2D.Double p = new Path2D.Double();
 				
@@ -103,10 +107,10 @@ public class MfencedRendNode extends ParseRendNode {
 		{
 
 			@Override
-			public void draw(MfencedRendNode rend, Graphics2D g, int xoff,
-					int yoff) {
+			public void draw(MfencedRendNode rend, Graphics2D g, double xoff,
+					double yoff) {
 				
-				rend.script.draw(g, xoff + 10 , yoff);
+				rend.script.draw(g, xoff , yoff);
 				
 				Path2D.Double p = new Path2D.Double();
 				
@@ -137,10 +141,10 @@ public class MfencedRendNode extends ParseRendNode {
 		{
 
 			@Override
-			public void draw(MfencedRendNode rend, Graphics2D g, int xoff,
-					int yoff) {
+			public void draw(MfencedRendNode rend, Graphics2D g, double xoff,
+					double yoff) {
 				
-				rend.script.draw(g, xoff + 10 , yoff);
+				rend.script.draw(g, xoff , yoff);
 				
 				Path2D.Double p = new Path2D.Double();
 				
@@ -158,7 +162,7 @@ public class MfencedRendNode extends ParseRendNode {
 			
 		};
 		
-		public abstract void draw( MfencedRendNode rend , Graphics2D g , int xoff ,int yoff);
+		public abstract void draw( MfencedRendNode rend , Graphics2D g , double xoff , double yoff);
 		
 	};
 	
@@ -178,8 +182,8 @@ public class MfencedRendNode extends ParseRendNode {
 	}
 
 	@Override
-	public void draw(Graphics2D g, int xoff, int yoff) {
-		rendMode.draw( this , g , xoff , yoff );
+	public void draw(Graphics2D g, double xoff, double yoff) {
+		rendMode.draw( this , g , xoff + xOffset , yoff + yOffset );
 	}
 	
 	
@@ -190,6 +194,30 @@ public class MfencedRendNode extends ParseRendNode {
 		p0.next = nxt;
 		ds.insert( p0 );
 		return( p0 );
+	}
+	
+	
+	@Override
+	public void calcRects( final Font inFont , final java.lang.Double fontSz , final FontRenderContext tempFrc )
+	{
+		// next = null;
+		
+		script.calcRects(inFont, fontSz, tempFrc);
+		
+		script.setxOffset( 5.0 );
+		script.setyOffset( 5.0 );
+		
+		connRect = new Rectangle2D.Double( script.getConnRect().x , 
+				script.getConnRect().y , 
+				script.getConnRect().width + 10.0 , 
+				script.getConnRect().height + 10.0 );
+		
+		imgRect = new Rectangle2D.Double( script.getImgRect().x , 
+				script.getImgRect().y , 
+				script.getImgRect().width + 10.0 , 
+				script.getImgRect().height + 10.0 );
+		
+		
 	}
 
 	

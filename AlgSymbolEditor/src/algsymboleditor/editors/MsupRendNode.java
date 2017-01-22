@@ -30,34 +30,43 @@
 
 package algsymboleditor.editors;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.font.FontRenderContext;
 
 import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating a renderable version of an mrow.
+ * Node indicating a renderable version of an superscript production.
  * @author tgreen
  *
  */
 public class MsupRendNode extends ParseRendNode {
 	
+	/**
+	 * The parsed script production.
+	 */
 	protected ParseRendNode script;
+	
+	/**
+	 * The parsed superscript production.
+	 */
 	protected ParseRendNode superscript;
 
 	/**
 	 * Constructs the node.
-	 * @param _parseValue The parsed token.
-	 * @param _next The next node in the list.
+	 * @param _script The parsed script production.
+	 * @param _superscript The parsed superscript production.
 	 */
-	public MsupRendNode( ParseRendNode a, ParseRendNode b) {
-		super( b.next );
-		script = a;
-		superscript = b;
+	public MsupRendNode( ParseRendNode _script, ParseRendNode _superscript) {
+		super( _superscript.next );
+		script = _script;
+		superscript = _superscript;
 	}
 
 	@Override
-	public void draw(Graphics2D g, int xoff, int yoff) {
+	public void draw(Graphics2D g, double xoff, double yoff) {
 		script.draw(g, xoff, yoff);
 		superscript.draw(g, xoff + 15, yoff - 15);
 	}
@@ -70,6 +79,15 @@ public class MsupRendNode extends ParseRendNode {
 		p0.next = nxt;
 		ds.insert( p0 );
 		return( p0 );
+	}
+	
+	@Override
+	public void calcRects(Font inFont, Double fontSz, FontRenderContext tempFrc) {
+		// next = null;
+		
+		handleCharParse( script , superscript , null ,
+				null , null , 
+				inFont , fontSz, fontSz * 10.0 / 12.0 , tempFrc );
 	}
 
 	

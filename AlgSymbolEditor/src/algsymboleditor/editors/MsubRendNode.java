@@ -30,36 +30,46 @@
 
 package algsymboleditor.editors;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.Rectangle2D.Double;
 
 import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating a renderable version of an mrow.
+ * Node indicating a renderable version of an subscript production.
  * @author tgreen
  *
  */
 public class MsubRendNode extends ParseRendNode {
 	
+	/**
+	 * The parsed script production.
+	 */
 	protected ParseRendNode script;
+	
+	/**
+	 * The parsed subscript production.
+	 */
 	protected ParseRendNode subscript;
 
 	/**
 	 * Constructs the node.
-	 * @param _parseValue The parsed token.
-	 * @param _next The next node in the list.
+	 * @param _script The parsed script production.
+	 * @param _subscript The parsed subscript production.
 	 */
-	public MsubRendNode( ParseRendNode a, ParseRendNode b) {
-		super( b.next );
-		script = a;
-		subscript = b;
+	public MsubRendNode( ParseRendNode _script, ParseRendNode _subscript) {
+		super( _subscript.next );
+		script = _script;
+		subscript = _subscript;
 	}
 
 	@Override
-	public void draw(Graphics2D g, int xoff, int yoff) {
-		script.draw(g, xoff, yoff);
-		subscript.draw(g, xoff + 15, yoff + 15);
+	public void draw(Graphics2D g, double xoff, double yoff) {
+		script.draw(g, xoff+xOffset, yoff+yOffset);
+		subscript.draw(g, xoff+xOffset, yoff+yOffset);
 	}
 	
 	
@@ -70,6 +80,15 @@ public class MsubRendNode extends ParseRendNode {
 		p0.next = nxt;
 		ds.insert( p0 );
 		return( p0 );
+	}
+	
+	@Override
+	public void calcRects( final Font inFont , final java.lang.Double fontSz , final FontRenderContext tempFrc ) {
+		// next = null;
+		
+		handleCharParse( script , null , subscript ,
+				null , null , 
+				inFont , fontSz, fontSz * 10.0 / 12.0 , tempFrc );
 	}
 
 	

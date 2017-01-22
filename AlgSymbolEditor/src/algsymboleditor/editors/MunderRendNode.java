@@ -30,7 +30,9 @@
 
 package algsymboleditor.editors;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.font.FontRenderContext;
 
 import simplealgebra.symbolic.DroolsSession;
 
@@ -64,9 +66,9 @@ public class MunderRendNode extends ParseRendNode {
 	}
 
 	@Override
-	public void draw(Graphics2D g, int xoff, int yoff) {
-		script.draw(g, xoff, yoff);
-		underscript.draw(g, xoff, yoff + 15);
+	public void draw(Graphics2D g, double xoff, double yoff) {
+		script.draw(g, xoff+xOffset, yoff+yOffset);
+		underscript.draw(g, xoff+xOffset, yoff+yOffset);
 	}
 	
 	
@@ -77,6 +79,15 @@ public class MunderRendNode extends ParseRendNode {
 		p0.next = nxt;
 		ds.insert( p0 );
 		return( p0 );
+	}
+
+	@Override
+	public void calcRects( final Font inFont , final java.lang.Double fontSz , final FontRenderContext tempFrc ) {
+		// next = null;
+		
+		handleCharParse( script , null , null ,
+				null , underscript , 
+				inFont , fontSz, fontSz * 10.0 / 12.0 , tempFrc );
 	}
 
 	

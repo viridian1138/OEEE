@@ -30,7 +30,12 @@
 
 package algsymboleditor.editors;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.Path2D;
+import java.awt.geom.Rectangle2D.Double;
+import java.util.ArrayList;
 
 import simplealgebra.symbolic.DroolsSession;
 
@@ -57,11 +62,48 @@ public class MfracRendNode extends ParseRendNode {
 	}
 
 	@Override
-	public void draw(Graphics2D g, int xoff, int yoff) {
-		numer.draw(g, xoff, yoff - 8);
-		g.drawLine( xoff - 8 , yoff, xoff + 16, yoff);
-		denom.draw(g, xoff, yoff + 15);
+	public void draw(Graphics2D g, double xoff, double yoff) {
+		
+		numer.draw(g, xoff+xOffset, yoff+yOffset);
+		
+		Path2D.Double p = new Path2D.Double();
+		
+		p.moveTo( imgRect.x + xoff + xOffset , numer.getImgRect().y + numer.getImgRect().height + 1.5 + yoff + connRect.y );
+		p.lineTo( imgRect.x + imgRect.width + xoff + xOffset , numer.getImgRect().y + numer.getImgRect().height + 1.5 + yoff + connRect.y );
+		
+		g.draw( p );
+		
+		denom.draw(g, xoff+xOffset, yoff+yOffset);
 	}
+	
+	
+	
+	@Override
+	public void calcRects( final Font inFont , final java.lang.Double fontSz , final FontRenderContext tempFrc )
+	{
+		// next = null;
+		
+		numer.calcRects(inFont, fontSz, tempFrc);
+		denom.calcRects(inFont, fontSz, tempFrc);
+		
+		final double cnw = Math.max( numer.getConnRect().width , denom.getConnRect().width );
+		
+		numer.setxOffset( ( cnw - numer.getConnRect().width ) / 2.0 );
+		
+		denom.setxOffset( ( cnw - denom.getConnRect().width ) / 2.0 );
+		
+		final double deltaY = ( numer.getImgRect().y + numer.getImgRect().height + 3.0 ) + ( denom.getConnRect().y - denom.getImgRect().y );
+		denom.setyOffset( deltaY );
+		
+		ArrayList<ParseRendNode> ar = new ArrayList<ParseRendNode>();
+		ar.add( numer );
+		ar.add( denom );
+		
+		connRect = buildConnRect( ar );
+		imgRect = buildImgRect( ar );
+		
+	}
+	
 	
 	
 	@Override

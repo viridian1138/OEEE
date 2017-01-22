@@ -30,39 +30,53 @@
 
 package algsymboleditor.editors;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.font.FontRenderContext;
 
 import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating a renderable version of an mrow.
+ * Node indicating a renderable version of an subscript-superscript production.
  * @author tgreen
  *
  */
 public class MsubsupRendNode extends ParseRendNode {
 	
+	/**
+	 * The parsed script production.
+	 */
 	protected ParseRendNode script;
+	
+	/**
+	 * The parsed subscript production.
+	 */
 	protected ParseRendNode subscript;
+	
+	/**
+	 * The parsed superscript production.
+	 */
 	protected ParseRendNode superscript;
 
 	/**
 	 * Constructs the node.
-	 * @param _parseValue The parsed token.
-	 * @param _next The next node in the list.
+	 * @param _script The parsed script production.
+	 * @param _subscript The parsed subscript production.
+	 * @param _superscript The parsed superscript production.
 	 */
-	public MsubsupRendNode( ParseRendNode a, ParseRendNode b, ParseRendNode c) {
-		super( c.next );
-		script = a;
-		subscript = b;
-		superscript = c;
+	public MsubsupRendNode( ParseRendNode _script, ParseRendNode _subscript, ParseRendNode _superscript) {
+		super( _superscript.next );
+		script = _script;
+		subscript = _subscript;
+		superscript = _superscript;
 	}
 
 	@Override
-	public void draw(Graphics2D g, int xoff, int yoff) {
-		script.draw(g, xoff, yoff);
-		subscript.draw(g, xoff + 15, yoff + 15);
-		superscript.draw(g, xoff + 15, yoff - 15);
+	public void draw(Graphics2D g, double xoff, double yoff) {
+		script.draw(g, xoff+xOffset, yoff+yOffset);
+		subscript.draw(g, xoff+xOffset, yoff+yOffset);
+		superscript.draw(g, xoff+xOffset, yoff+yOffset);
 	}
 	
 	
@@ -73,6 +87,15 @@ public class MsubsupRendNode extends ParseRendNode {
 		p0.next = nxt;
 		ds.insert( p0 );
 		return( p0 );
+	}
+	
+	@Override
+	public void calcRects( final Font inFont , final java.lang.Double fontSz , final FontRenderContext tempFrc ) {
+		// next = null;
+		
+		handleCharParse( script , superscript , subscript ,
+				null , null , 
+				inFont , fontSz, fontSz * 10.0 / 12.0 , tempFrc );
 	}
 
 	

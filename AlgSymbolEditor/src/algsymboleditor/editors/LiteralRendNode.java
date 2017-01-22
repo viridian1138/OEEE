@@ -29,7 +29,12 @@
 
 package algsymboleditor.editors;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Double;
 
 import simplealgebra.symbolic.DroolsSession;
 import meta.FlexString;
@@ -43,6 +48,9 @@ import meta.FlexString;
 public class LiteralRendNode extends ParseRendNode {
 
 	protected final FlexString str = new FlexString();
+	
+	protected Font rendFont = null;
+	
 	
 	/**
 	 * Constructs the node.
@@ -60,8 +68,9 @@ public class LiteralRendNode extends ParseRendNode {
 
 
 	@Override
-	public void draw(Graphics2D g, int xoff, int yoff) {
-		str.drawString(g, xoff, yoff);
+	public void draw(Graphics2D g, double xoff, double yoff) {
+		g.setFont( rendFont );
+		str.drawString(g, (int) ( xoff + xOffset), (int) ( yoff + yOffset ) );
 	}
 	
 	
@@ -74,7 +83,32 @@ public class LiteralRendNode extends ParseRendNode {
 		ds.insert( p0 );
 		return( p0 );
 	}
+	
+	
+	@Override
+	public void calcRects( final Font inFont , final java.lang.Double fontSz , final FontRenderContext tempFrc )
+	{
+		// next = null;
+		
+		String str = this.str.exportString();
+		TextLayout tl = new TextLayout( str , inFont , tempFrc );
+		Rectangle2D bounds = tl.getBounds();
+		double cwidth = tl.getAdvance();
+		double imgX = bounds.getX();
+		double imgY = bounds.getY();
+		double imgWidth = bounds.getWidth();
+		double imgHeight = bounds.getHeight();
+		Rectangle2D.Double iConnRect = new Rectangle2D.Double( 0 , imgY , cwidth , imgHeight );
+
+		Rectangle2D.Double iImgRect = new Rectangle2D.Double( imgX , imgY , imgWidth , imgHeight );
+
+		connRect = iConnRect;
+		imgRect = iImgRect;
+		rendFont = inFont;
+	}
 
 	
+	
 }
+
 

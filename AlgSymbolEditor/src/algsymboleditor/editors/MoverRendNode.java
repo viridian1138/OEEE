@@ -30,46 +30,65 @@
 
 package algsymboleditor.editors;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.Rectangle2D.Double;
 
 import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating a renderable version of an mrow.
+ * Node indicating a renderable version of an overscript production.
  * @author tgreen
  *
  */
 public class MoverRendNode extends ParseRendNode {
 	
+	/**
+	 * The parsed script production.
+	 */
 	protected ParseRendNode script;
-	protected ParseRendNode subscript;
+	
+	/**
+	 * The parsed overscript production.
+	 */
+	protected ParseRendNode overscript;
 
 	/**
 	 * Constructs the node.
-	 * @param _parseValue The parsed token.
-	 * @param _next The next node in the list.
+	 * @param _script The parsed script production.
+	 * @param _overscript The parsed overscript production.
 	 */
-	public MoverRendNode( ParseRendNode a, ParseRendNode b) {
-		super( b.next );
-		script = a;
-		subscript = b;
+	public MoverRendNode( ParseRendNode _script, ParseRendNode _overscript) {
+		super( _overscript.next );
+		script = _script;
+		overscript = _overscript;
 	}
 
 	@Override
-	public void draw(Graphics2D g, int xoff, int yoff) {
-		script.draw(g, xoff, yoff);
-		subscript.draw(g, xoff, yoff - 15);
+	public void draw(Graphics2D g, double xoff, double yoff) {
+		script.draw(g, xoff+xOffset, yoff+yOffset);
+		overscript.draw(g, xoff+xOffset, yoff+yOffset);
 	}
 	
 	
 	@Override
 	public ParseNode applyReng( ParseNode nxt , DroolsSession ds )
 	{
-		MoverRendNode p0 = new MoverRendNode( script , subscript );
+		MoverRendNode p0 = new MoverRendNode( script , overscript );
 		p0.next = nxt;
 		ds.insert( p0 );
 		return( p0 );
+	}
+
+	@Override
+	public void calcRects( final Font inFont , final java.lang.Double fontSz , final FontRenderContext tempFrc ) {
+		// next = null;
+		
+		handleCharParse( script , null , null ,
+				overscript , null , 
+				inFont , fontSz, fontSz * 10.0 / 12.0 , tempFrc );
 	}
 
 	

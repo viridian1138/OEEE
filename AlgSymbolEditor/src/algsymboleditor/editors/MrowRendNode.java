@@ -30,7 +30,11 @@
 
 package algsymboleditor.editors;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Double;
 import java.util.ArrayList;
 
 import simplealgebra.symbolic.DroolsSession;
@@ -54,15 +58,40 @@ public class MrowRendNode extends ParseRendNode {
 
 	
 	@Override
-	public void draw(Graphics2D g, int xoff, int yoff) {
-		int x = xoff;
+	public void draw(Graphics2D g, double xoff, double yoff) {
 		final int sz = lst.size();
 		for( int cnt = 0 ; cnt < sz ; cnt++ )
 		{
-			lst.get( cnt ).draw(g, x, yoff);
-			x += 15;
+			lst.get( cnt ).draw(g, xoff+xOffset, yoff+yOffset);
 		}
 	}
+	
+	
+	
+	@Override
+	public void calcRects( final Font inFont , final java.lang.Double fontSz , final FontRenderContext tempFrc )
+	{
+		// next = null;
+		
+		final int sz = lst.size();
+		for( int cnt = 0 ; cnt < sz ; cnt++ )
+		{
+			lst.get( cnt ).calcRects(inFont, fontSz, tempFrc);
+		}
+		
+		double cnx = 0.0;
+		for( int cnt = 0 ; cnt < sz ; cnt++ )
+		{
+			lst.get( cnt ).setxOffset(cnx);
+			cnx = cnx + lst.get( cnt ).getConnRect().width;
+		}
+		
+		
+		connRect = buildConnRect( lst );
+		imgRect = buildImgRect( lst );
+	}
+	
+	
 	
 	
 	@Override

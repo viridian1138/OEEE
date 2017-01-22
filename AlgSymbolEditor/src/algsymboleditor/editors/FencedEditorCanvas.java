@@ -37,6 +37,7 @@ import java.awt.Rectangle;
 import javax.swing.JPanel;
 
 import java.awt.*;
+import java.awt.font.FontRenderContext;
 import java.awt.geom.Path2D;
 import java.beans.XMLDecoder;
 import java.io.ByteArrayInputStream;
@@ -539,14 +540,31 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 		
 		swingDisplayString.drawString(g, 10, 20);
 		
+		
+		Font inFont = null;
+		double fontSz = 32;
+		FontRenderContext tempFrc = null;
+		
+		
 		int yy = 50;
 		ParseNode nxt = swingRendNode;
 		while( nxt != null )
 		{
 			if( nxt instanceof ParseRendNode )
 			{
-				( (ParseRendNode) nxt ).draw(g, 10, yy);
-				yy += 30;
+				ParseRendNode pr = (ParseRendNode) nxt;
+				if( pr.getConnRect() == null )
+				{
+					if( inFont == null )
+					{
+						Font f = gg.getFont();
+						inFont = new Font( f.getName() , f.getStyle() , (int) fontSz );
+						tempFrc = g.getFontRenderContext();
+					}
+					pr.calcRects(inFont, fontSz, tempFrc);
+				}
+				pr.draw(g, 10, yy - pr.getImgRect().y );
+				yy += 10 + pr.getImgRect().height - pr.getImgRect().height ;
 			}
 			nxt = nxt.next;
 		}
