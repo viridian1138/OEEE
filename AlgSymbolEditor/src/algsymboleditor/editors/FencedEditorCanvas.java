@@ -634,6 +634,15 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	
 	
 	/**
+	 * handles exporting the MathML expression to the console on the Swing thread.
+	 */
+	public void handleExportToConsoleSwing()
+	{
+		AlgCommon.exportTextToConsole( swingDisplayString );
+	}
+	
+	
+	/**
 	 * Handles a delete request on the Swing thread.
 	 */
 	public void handleDeleteSwing( )
@@ -932,6 +941,22 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 			public void run()
 			{
 				handleOverarchInsertSwing( in );
+			}
+		});
+	}
+	
+	
+	/**
+	 * handles exporting the MathML expression to the console on the SWT thread.
+	 */
+	public void handleExportToConsoleSwt()
+	{
+		SwingUtilities.invokeLater( new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				handleExportToConsoleSwing( );
 			}
 		});
 	}

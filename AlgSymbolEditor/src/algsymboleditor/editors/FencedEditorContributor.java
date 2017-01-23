@@ -186,6 +186,24 @@ public class FencedEditorContributor extends MultiPageEditorActionBarContributor
 	}
 	
 	
+	/**
+	 * Handles exporting the MathML expression to the console.
+	 */
+	protected void handleExportToConsole()
+	{
+		final IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+		if( part instanceof FencedEditor )
+		{
+			final FencedEditor apart = (FencedEditor) part;
+			apart.handleExportToConsole();
+		}
+		else
+		{
+			System.out.println( "Symbol Editor Not Found." );
+		}
+	}
+	
+	
 	
 	/**
 	 * Creates a Alg Fenced contributor.
@@ -264,7 +282,7 @@ public class FencedEditorContributor extends MultiPageEditorActionBarContributor
 		dumpTextToConsoleAction = new Action() {
 			@Override
 			public void run() {
-				MessageDialog.openInformation(null, "FencedEditor", "Dump Text To Console Action Executed");
+				handleExportToConsole();
 			}
 		};
 		dumpTextToConsoleAction.setText("Dump Text To Console");

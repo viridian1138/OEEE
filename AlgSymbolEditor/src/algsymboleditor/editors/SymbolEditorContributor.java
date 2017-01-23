@@ -187,6 +187,24 @@ public class SymbolEditorContributor extends MultiPageEditorActionBarContributor
 	}
 	
 	
+	/**
+	 * Handles exporting the MathML expression to the console.
+	 */
+	protected void handleExportToConsole()
+	{
+		final IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+		if( part instanceof SymbolEditor )
+		{
+			final SymbolEditor apart = (SymbolEditor) part;
+			apart.handleExportToConsole();
+		}
+		else
+		{
+			System.out.println( "Symbol Editor Not Found." );
+		}
+	}
+	
+	
 	
 	/**
 	 * Creates a Alg Symbol contributor.
@@ -275,7 +293,7 @@ public class SymbolEditorContributor extends MultiPageEditorActionBarContributor
 		dumpTextToConsoleAction = new Action() {
 			@Override
 			public void run() {
-				MessageDialog.openInformation(null, "SymbolEditor", "Dump Text To Console Action Executed");
+				handleExportToConsole();
 			}
 		};
 		dumpTextToConsoleAction.setText("Dump Text To Console");

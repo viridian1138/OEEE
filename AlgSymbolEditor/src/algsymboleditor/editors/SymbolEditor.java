@@ -425,6 +425,15 @@ public class SymbolEditor extends EditorPart implements IInitiateMarkDirty {
 	
 	
 	/**
+	 * Handles exporting the MathML expression to the console.
+	 */
+	public void handleExportToConsole()
+	{
+		canvas.handleExportToConsoleSwt();
+	}
+	
+	
+	/**
 	 * Handles a request to delete the current content.
 	 */
 	protected void handleDelete()

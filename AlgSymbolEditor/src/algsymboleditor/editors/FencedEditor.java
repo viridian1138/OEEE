@@ -425,9 +425,18 @@ public class FencedEditor extends EditorPart implements IInitiateMarkDirty {
 	
 	
 	/**
+	 * Handles exporting the MathML expression to the console.
+	 */
+	protected void handleExportToConsole()
+	{
+		canvas.handleExportToConsoleSwt();
+	}
+	
+	
+	/**
 	 * Handles a request to delete the current content.
 	 */
-	protected void handleDelete()
+	public void handleDelete()
 	{
 		canvas.handleDeleteSwt( );
 	}

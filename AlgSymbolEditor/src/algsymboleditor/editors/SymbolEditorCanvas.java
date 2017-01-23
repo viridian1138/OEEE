@@ -697,6 +697,15 @@ public class SymbolEditorCanvas extends JPanel implements Scrollable {
 	
 	
 	/**
+	 * handles exporting the MathML expression to the console on the Swing thread.
+	 */
+	public void handleExportToConsoleSwing()
+	{
+		AlgCommon.exportTextToConsole( swingDisplayString );
+	}
+	
+	
+	/**
 	 * Handles a request to set the insertion mode on the Swing thread.
 	 * @param in The desired insertion mode.
 	 */
@@ -1101,6 +1110,22 @@ public class SymbolEditorCanvas extends JPanel implements Scrollable {
 			public void run()
 			{
 				handleOverarchInsertSwing( in );
+			}
+		});
+	}
+	
+	
+	/**
+	 * handles exporting the MathML expression to the console on the SWT thread.
+	 */
+	public void handleExportToConsoleSwt()
+	{
+		SwingUtilities.invokeLater( new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				handleExportToConsoleSwing( );
 			}
 		});
 	}

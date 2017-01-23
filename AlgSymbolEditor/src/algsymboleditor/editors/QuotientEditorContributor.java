@@ -184,6 +184,24 @@ public class QuotientEditorContributor extends MultiPageEditorActionBarContribut
 	}
 	
 	
+	/**
+	 * Handles exporting the MathML expression to the console.
+	 */
+	protected void handleExportToConsole()
+	{
+		final IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+		if( part instanceof QuotientEditor )
+		{
+			final QuotientEditor apart = (QuotientEditor) part;
+			apart.handleExportToConsole();
+		}
+		else
+		{
+			System.out.println( "Symbol Editor Not Found." );
+		}
+	}
+	
+	
 	
 	/**
 	 * Creates a Alg Quotient contributor.
@@ -240,7 +258,7 @@ public class QuotientEditorContributor extends MultiPageEditorActionBarContribut
 		dumpTextToConsoleAction = new Action() {
 			@Override
 			public void run() {
-				MessageDialog.openInformation(null, "QuotientEditor", "Dump Text To Console Action Executed");
+				handleExportToConsole();
 			}
 		};
 		dumpTextToConsoleAction.setText("Dump Text To Console");

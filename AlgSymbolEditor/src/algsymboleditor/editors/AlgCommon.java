@@ -143,6 +143,37 @@ public class AlgCommon {
 	}
 	
 	
+	/**
+	 * Exports the MathML expression to the console.
+	 * @param str The editor display string.
+	 */
+	public static void exportTextToConsole( final FlexString str )
+	{
+		
+		System.out.println( "" );
+		System.out.println( "<math display=\"inline\">" );
+		
+		int rcnt = 0;
+		final int len = str.strlen();
+		
+		for( int index = 0 ; index < len ; index++ )
+		{
+			rcnt++;
+			final char ch = str.getChar( index );
+			if( ( rcnt > 50 ) && ( ( ch == '&' ) || ( ch == '<' ) ) )
+			{
+				System.out.println( "" );
+				rcnt = 0;
+			}
+			System.out.print( ch );
+		}
+		
+		System.out.println( "" );
+		System.out.println( "</math>" );
+		
+	}
+	
+	
 	
 	
 }
