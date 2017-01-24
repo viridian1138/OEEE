@@ -33,7 +33,7 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating the end of a MathML mrow.
+ * Node indicating the start of a MathML mfrac production.
  * @author tgreen
  *
  */
@@ -41,7 +41,6 @@ public class MfracStartNode extends ParseNode {
 
 	/**
 	 * Constructs the node.
-	 * @param _parseValue The parsed token.
 	 * @param _next The next node in the list.
 	 */
 	public MfracStartNode(ParseNode _next) {
@@ -49,6 +48,14 @@ public class MfracStartNode extends ParseNode {
 	}
 	
 	
+	/**
+	 * Applies the parsing of the quotient production.
+	 * @param numer The parsed numerator production.
+	 * @param denom The parsed denominator production.
+	 * @param endNode The end terminal of the quotient.
+	 * @param ds The Drools session.
+	 * @return The rendering node for the parsed production.
+	 */
 	public MfracRendNode applyParse( ParseRendNode numer , ParseRendNode denom , ParseNode endNode , DroolsSession ds )
 	{
 		MfracRendNode r = new MfracRendNode( numer , denom );

@@ -171,7 +171,7 @@ public class NewFencedWizard extends Wizard implements INewWizard {
 		{
 			final HighLevelList<StdLowLevelList<FlexString>,FlexString> fencedscriptLst = new HighLevelList<StdLowLevelList<FlexString>,FlexString>();
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			FencedEditorCanvas.writeAlgFencedEditor(fencedscriptLst, baos);
+			FencedEditorCanvas.writeAlgFencedEditor(fencedscriptLst, FencedEditorCanvas.InsertModes.CIRC_MODE, baos);
 			ByteArrayInputStream stream = new ByteArrayInputStream( baos.toByteArray() );
 			return( stream );
 		}

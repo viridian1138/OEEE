@@ -47,8 +47,14 @@ import meta.FlexString;
  */
 public class LiteralRendNode extends ParseRendNode {
 
+	/**
+	 * String to be displayed as the literal.
+	 */
 	protected final FlexString str = new FlexString();
 	
+	/**
+	 * Font in which to display the string.
+	 */
 	protected Font rendFont = null;
 	
 	
@@ -61,6 +67,10 @@ public class LiteralRendNode extends ParseRendNode {
 	}
 	
 	
+	/**
+	 * Gets the string in which to display the literal.
+	 * @return String in which to display the literal.
+	 */
 	public FlexString getStr()
 	{
 		return( str );

@@ -98,25 +98,25 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 			@Override
 			void insertStringSwing( String str , FencedEditorCanvas canvas )
 			{
-				AlgCommon.performLstInsert( str, canvas.swingFencescriptLst );
+				AlgCommon.performLstInsert( str, canvas.swingScriptLst );
 			}
 			
 			@Override
 			void deleteSymSwing( FencedEditorCanvas canvas )
 			{
-				AlgCommon.performDelete( canvas.swingFencescriptLst );
+				AlgCommon.performDelete( canvas.swingScriptLst );
 			}
 			
 			@Override
 			void insertStringSwt( String str , FencedEditorCanvas canvas )
 			{
-				AlgCommon.performLstInsert( str, canvas.swtFencescriptLst );
+				AlgCommon.performLstInsert( str, canvas.swtScriptLst );
 			}
 			
 			@Override
 			void deleteSymSwt( FencedEditorCanvas canvas )
 			{
-				AlgCommon.performDelete( canvas.swtFencescriptLst );
+				AlgCommon.performDelete( canvas.swtScriptLst );
 			}
 
 			@Override
@@ -134,25 +134,25 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 			@Override
 			void insertStringSwing( String str , FencedEditorCanvas canvas )
 			{
-				AlgCommon.performLstInsert( str, canvas.swingFencescriptLst );
+				AlgCommon.performLstInsert( str, canvas.swingScriptLst );
 			}
 			
 			@Override
 			void deleteSymSwing( FencedEditorCanvas canvas )
 			{
-				AlgCommon.performDelete( canvas.swingFencescriptLst );
+				AlgCommon.performDelete( canvas.swingScriptLst );
 			}
 			
 			@Override
 			void insertStringSwt( String str , FencedEditorCanvas canvas )
 			{
-				AlgCommon.performLstInsert( str, canvas.swtFencescriptLst );
+				AlgCommon.performLstInsert( str, canvas.swtScriptLst );
 			}
 			
 			@Override
 			void deleteSymSwt( FencedEditorCanvas canvas )
 			{
-				AlgCommon.performDelete( canvas.swtFencescriptLst );
+				AlgCommon.performDelete( canvas.swtScriptLst );
 			}
 			
 			@Override
@@ -170,25 +170,25 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 			@Override
 			void insertStringSwing( String str , FencedEditorCanvas canvas )
 			{
-				AlgCommon.performLstInsert( str, canvas.swingFencescriptLst );
+				AlgCommon.performLstInsert( str, canvas.swingScriptLst );
 			}
 			
 			@Override
 			void deleteSymSwing( FencedEditorCanvas canvas )
 			{
-				AlgCommon.performDelete( canvas.swingFencescriptLst );
+				AlgCommon.performDelete( canvas.swingScriptLst );
 			}
 			
 			@Override
 			void insertStringSwt( String str , FencedEditorCanvas canvas )
 			{
-				AlgCommon.performLstInsert( str, canvas.swtFencescriptLst );
+				AlgCommon.performLstInsert( str, canvas.swtScriptLst );
 			}
 			
 			@Override
 			void deleteSymSwt( FencedEditorCanvas canvas )
 			{
-				AlgCommon.performDelete( canvas.swtFencescriptLst );
+				AlgCommon.performDelete( canvas.swtScriptLst );
 			}
 			
 			@Override
@@ -206,25 +206,25 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 			@Override
 			void insertStringSwing( String str , FencedEditorCanvas canvas )
 			{
-				AlgCommon.performLstInsert( str, canvas.swingFencescriptLst );
+				AlgCommon.performLstInsert( str, canvas.swingScriptLst );
 			}
 			
 			@Override
 			void deleteSymSwing( FencedEditorCanvas canvas )
 			{
-				AlgCommon.performDelete( canvas.swingFencescriptLst );
+				AlgCommon.performDelete( canvas.swingScriptLst );
 			}
 			
 			@Override
 			void insertStringSwt( String str , FencedEditorCanvas canvas )
 			{
-				AlgCommon.performLstInsert( str, canvas.swtFencescriptLst );
+				AlgCommon.performLstInsert( str, canvas.swtScriptLst );
 			}
 			
 			@Override
 			void deleteSymSwt( FencedEditorCanvas canvas )
 			{
-				AlgCommon.performDelete( canvas.swtFencescriptLst );
+				AlgCommon.performDelete( canvas.swtScriptLst );
 			}
 			
 			@Override
@@ -442,16 +442,16 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	
 	
 	/**
-	 * The fencescript list on the SWT thread.
+	 * The terminal symbol list on the SWT thread.
 	 */
-	HighLevelList<StdLowLevelList<FlexString>,FlexString> swtFencescriptLst = new HighLevelList<StdLowLevelList<FlexString>,FlexString>();
+	HighLevelList<StdLowLevelList<FlexString>,FlexString> swtScriptLst = new HighLevelList<StdLowLevelList<FlexString>,FlexString>();
 	
 	
 	
 	/**
-	 * The fencescript list on the Swing thread.
+	 * The terminal symbol list on the Swing thread.
 	 */
-	HighLevelList<StdLowLevelList<FlexString>,FlexString> swingFencescriptLst = new HighLevelList<StdLowLevelList<FlexString>,FlexString>();
+	HighLevelList<StdLowLevelList<FlexString>,FlexString> swingScriptLst = new HighLevelList<StdLowLevelList<FlexString>,FlexString>();
 	
 	
 	/**
@@ -498,7 +498,7 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	public void setDisplay( Display _display )
 	{
 		display = _display;
-		updateSwtInit( swingFencescriptLst );
+		updateSwtInit( swingScriptLst , swingInsertMode );
 	}
 	
 	
@@ -647,7 +647,7 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	 */
 	public void handleDeleteSwing( )
 	{	
-		swingFencescriptLst.eraseAllInfo();
+		swingScriptLst.eraseAllInfo();
 		
 		updateSwingDisplayString();
 		
@@ -686,7 +686,7 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	 */
 	protected void updateSwingDisplayString()
 	{
-		swingDisplayString = genDisplayString( swingFencescriptLst , swingInsertMode );
+		swingDisplayString = genDisplayString( swingScriptLst , swingInsertMode );
 		ParseNode pnode = genRegex.parse( swingDisplayString );
 		
 		try
@@ -785,7 +785,7 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 				@Override
 				public void run()
 				{
-					swtFencescriptLst.eraseAllInfo();
+					swtScriptLst.eraseAllInfo();
 					
 					swtSetDirty( true );
 				}
@@ -817,9 +817,10 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	
 	/**
 	 * Handles a request to initialize on the SWT thread.
-	 * @param overscriptLst The overscript list.
+	 * @param scriptLst The list of input terminal symbols.
+	 * @param rndMode The rendering mode for the terminal symbols.
 	 */
-	protected void updateSwtInit( final HighLevelList<StdLowLevelList<FlexString>,FlexString> fencedscriptLst )
+	protected void updateSwtInit( final HighLevelList<StdLowLevelList<FlexString>,FlexString> scriptLst , final FencedEditorCanvas.InsertModes rndMode )
 	{
 		if( display != null )
 		{
@@ -828,8 +829,9 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 				@Override
 				public void run()
 				{
-					swtFencescriptLst.eraseAllInfo();
-					fencedscriptLst.copyAllInfo( swtFencescriptLst );
+					swtScriptLst.eraseAllInfo();
+					scriptLst.copyAllInfo( swtScriptLst );
+					swtInsertMode = rndMode;
 					
 					swtSetDirty( false );
 				}
@@ -840,13 +842,13 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	
 	/**
 	 * Generates the combined display string.
-	 * @param overscriptLst The overscript list.
+	 * @param scriptLst The list of input terminal symbols.
 	 * @return The output string in which to insert.
 	 */
-	protected static FlexString genDisplayString( final HighLevelList<StdLowLevelList<FlexString>,FlexString> fencedscriptLst , final InsertModes typeMode )
+	protected static FlexString genDisplayString( final HighLevelList<StdLowLevelList<FlexString>,FlexString> scriptLst , final InsertModes typeMode )
 		{
 		
-			final boolean fenceds = fencedscriptLst.empty();
+			final boolean fenceds = scriptLst.empty();
 			
 			
 			FlexString ret = new FlexString();
@@ -862,7 +864,7 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 			}
 			else
 			{
-				AlgCommon.condenseText( fencedscriptLst , ret );
+				AlgCommon.condenseText( scriptLst , ret );
 			}
 			
 			
@@ -985,7 +987,7 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	public void handleCopySwt( Clipboard clipboard )
 	{
 		TextTransfer transfer;
-		final FlexString swtStr = genDisplayString( swtFencescriptLst , swtInsertMode );
+		final FlexString swtStr = genDisplayString( swtScriptLst , swtInsertMode );
 		final String[] data = { AlgCommon.MATCH_STR + swtStr.exportString() };
 		System.out.println( data );
 		clipboard.setContents( data /* new Object[] { data } */ , 
@@ -1026,7 +1028,7 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 		try
 		{
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			writeAlgFencedEditor( swtFencescriptLst, baos);
+			writeAlgFencedEditor( swtScriptLst, swtInsertMode, baos);
 			ByteArrayInputStream stream = new ByteArrayInputStream( baos.toByteArray() );
 			if( !( file.exists() ) )
 			{
@@ -1054,11 +1056,13 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	{	
 		try {
 			
-		readAlgFencedEditor(is, swingFencescriptLst);
+		FencedEditorCanvas.InsertModes[] rm = { null };
+		readAlgFencedEditor(is, swingScriptLst, rm);
+		swingInsertMode = rm[ 0 ];
 		
 		updateSwingDisplayString();
 		
-		updateSwtInit( swingFencescriptLst );
+		updateSwtInit( swingScriptLst , swingInsertMode );
 		
 		}
 		catch( Throwable ex )
@@ -1102,12 +1106,14 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	
 	/**
 	 * Writes content to persistence.
-	 * @param overscriptLst Overscript list.
+	 * @param scriptLst The lst of input terminal symbols.
 	 * @param os Output stream to persistent store.
+	 * @param rendMode The input rendering mode for the terminal symbols.
 	 * @throws IOException
 	 */
 	public static void writeAlgFencedEditor( 
-			final HighLevelList<StdLowLevelList<FlexString>,FlexString> fencedscriptLst,
+			final HighLevelList<StdLowLevelList<FlexString>,FlexString> scriptLst,
+			final FencedEditorCanvas.InsertModes rendMode,
 			final OutputStream os ) throws IOException
 	{
 		ExXMLEncoder enc = new ExXMLEncoder( os );
@@ -1115,7 +1121,8 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 		VersionBuffer vb = new VersionBuffer( true );
 		
 		
-		vb.setProperty( "fencedscriptLst" , fencedscriptLst );
+		vb.setProperty( "scriptLst" , scriptLst );
+		vb.setProperty( "rendMode" , rendMode );
 		
 		
 		enc.writeObject( vb );
@@ -1127,22 +1134,25 @@ public class FencedEditorCanvas extends JPanel implements Scrollable {
 	/**
 	 * Reads content from persistence.
 	 * @param is Input stream from persistent store.
-	 * @param overscriptLst Overscript list.
-	 * @param underscriptLst Underscript list.
+	 * @param scriptLst The list of input terminal symbols.
+	 * @param rendMode The output rendering mode for the terminal symbols.
 	 * @throws IOException
 	 */
 	public static void readAlgFencedEditor( 
 			final InputStream is,
-			final HighLevelList<StdLowLevelList<FlexString>,FlexString> fencedscriptLst ) throws IOException
+			final HighLevelList<StdLowLevelList<FlexString>,FlexString> scriptLst,
+			final  FencedEditorCanvas.InsertModes[] rendMode ) throws IOException
 	{
 		XMLDecoder enc = new XMLDecoder( is );
 		
 		VersionBuffer vb = (VersionBuffer)( enc.readObject() );
 		
 		
-		final HighLevelList<StdLowLevelList<FlexString>,FlexString> fencedscriptLs = 
-				(HighLevelList<StdLowLevelList<FlexString>,FlexString>)( vb.getPropertyEx( "fencedscriptLst" ) );
-		fencedscriptLs.copyDataPlusPtrInfo( fencedscriptLst );
+		final HighLevelList<StdLowLevelList<FlexString>,FlexString> scriptLs = 
+				(HighLevelList<StdLowLevelList<FlexString>,FlexString>)( vb.getPropertyEx( "scriptLst" ) );
+		scriptLs.copyDataPlusPtrInfo( scriptLst );
+		
+		rendMode[ 0 ] = (FencedEditorCanvas.InsertModes)( vb.getPropertyEx( "rendMode" ) );
 		
 		
 		enc.close();
