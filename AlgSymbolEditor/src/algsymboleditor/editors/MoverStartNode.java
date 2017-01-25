@@ -33,7 +33,13 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating the end of a MathML mrow.
+ * Node indicating the end of a MathML overscript production,
+ * producing an expression of the form <math display="inline">
+ * <mover><mi>&alpha;</mi><mi>&beta;</mi></mover>
+ * </math>.
+ * 
+ * This documentation should be viewed using Firefox version 33.1.1 or above.
+ * 
  * @author tgreen
  *
  */
@@ -41,7 +47,6 @@ public class MoverStartNode extends ParseNode {
 
 	/**
 	 * Constructs the node.
-	 * @param _parseValue The parsed token.
 	 * @param _next The next node in the list.
 	 */
 	public MoverStartNode(ParseNode _next) {
@@ -49,9 +54,17 @@ public class MoverStartNode extends ParseNode {
 	}
 	
 	
-	public MoverRendNode applyParse( ParseRendNode script , ParseRendNode superscript , ParseNode endNode , DroolsSession ds )
+	/**
+	 * Applies the parsing of the overscript production.
+	 * @param script The parsed script production.
+	 * @param overscript The parsed overscript production.
+	 * @param endNode The end terminal of the overscript.
+	 * @param ds The Drools session.
+	 * @return The rendering node for the parsed production.
+	 */
+	public MoverRendNode applyParse( ParseRendNode script , ParseRendNode overscript , ParseNode endNode , DroolsSession ds )
 	{
-		MoverRendNode r = new MoverRendNode( script , superscript );
+		MoverRendNode r = new MoverRendNode( script , overscript );
 		r.next = endNode.next;
 		ds.insert( r );
 		return( r );

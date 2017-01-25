@@ -33,7 +33,22 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating the end of a MathML mfenced production..
+ * Node indicating the end of a MathML mfenced production,
+ * producing an expression of the form <math display="inline">
+ * <mfenced open="(" close=")"><mi>&alpha;</mi></mfenced>
+ * </math> for a rendering mode of CIRC, 
+ * an expression of the form <math display="inline">
+ * <mfenced open="[" close="]"><mi>&alpha;</mi></mfenced>
+ * </math> for a rendering mode of SQUARE,
+ * an expression of the form <math display="inline">
+ * <mfenced open="{" close="}"><mi>&alpha;</mi></mfenced>
+ * </math> for a rendering mode of CURLY, and
+ * an expression of the form <math display="inline">
+ * <mfenced open="|" close="|"><mi>&alpha;</mi></mfenced>
+ * </math> for a rendering mode of VERT.
+ * 
+ * This documentation should be viewed using Firefox version 33.1.1 or above.
+ * 
  * @author tgreen
  *
  */
