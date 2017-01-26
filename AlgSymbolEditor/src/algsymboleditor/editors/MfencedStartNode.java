@@ -33,7 +33,7 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating the end of a MathML mfenced production,
+ * Node indicating the start of a MathML mfenced production,
  * producing an expression of the form <math display="inline">
  * <mfenced open="(" close=")"><mi>&alpha;</mi></mfenced>
  * </math> for a rendering mode of CIRC, 

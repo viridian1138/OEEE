@@ -33,7 +33,7 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating the end of a MathML overscript production,
+ * Node indicating the start of a MathML overscript production,
  * producing an expression of the form <math display="inline">
  * <mover><mi>&alpha;</mi><mi>&beta;</mi></mover>
  * </math>.

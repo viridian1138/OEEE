@@ -39,7 +39,13 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating a renderable version of an subscript production.
+ * Node indicating a renderable version of a MathML subscript production,
+ * producing an expression of the form <math display="inline">
+ * <msub><mi>&alpha;</mi><mi>&beta;</mi></msub>
+ * </math>.
+ * 
+ * This documentation should be viewed using Firefox version 33.1.1 or above.
+ * 
  * @author tgreen
  *
  */
