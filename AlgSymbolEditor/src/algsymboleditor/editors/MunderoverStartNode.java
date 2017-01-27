@@ -33,7 +33,14 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating the end of a MathML underscript-overscript production.
+ * Node indicating the end of a MathML underscript-overscript production,
+ * producing an expression of the form <math display="inline">
+ * <munderover><mi>&alpha;</mi><mi>&beta;</mi><mi>&gamma;
+ * </mi></munderover>
+ * </math>.
+ * 
+ * This documentation should be viewed using Firefox version 33.1.1 or above.
+ * 
  * @author tgreen
  *
  */
@@ -53,7 +60,7 @@ public class MunderoverStartNode extends ParseNode {
 	 * @param script The parsed script production.
 	 * @param underscript The parsed underscript production.
 	 * @param overscript The parsed overscript production.
-	 * @param endNode The end terminal of the underscript.
+	 * @param endNode The end terminal of the production.
 	 * @param ds The Drools session.
 	 * @return The rendering node for the parsed production.
 	 */

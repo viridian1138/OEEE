@@ -33,7 +33,14 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating the end of a MathML mrow.
+ * Node indicating the end of a MathML subscript-superscript production,
+ * producing an expression of the form <math display="inline">
+ * <msubsup><mi>&alpha;</mi><mi>&beta;</mi><mi>&gamma;
+ * </mi></msubsup>
+ * </math>.
+ * 
+ * This documentation should be viewed using Firefox version 33.1.1 or above.
+ * 
  * @author tgreen
  *
  */

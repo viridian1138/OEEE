@@ -33,7 +33,14 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating the end of a MathML underscript-overscript production.
+ * Node indicating the end of a MathML underscript-overscript production,
+ * producing an expression of the form <math display="inline">
+ * <munderover><mi>&alpha;</mi><mi>&beta;</mi><mi>&gamma;
+ * </mi></munderover>
+ * </math>.
+ * 
+ * This documentation should be viewed using Firefox version 33.1.1 or above.
+ * 
  * @author tgreen
  *
  */

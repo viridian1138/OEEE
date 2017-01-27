@@ -33,7 +33,14 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating the end of a MathML mrow.
+ * Node indicating the end of a MathML subscript-superscript production,
+ * producing an expression of the form <math display="inline">
+ * <msubsup><mi>&alpha;</mi><mi>&beta;</mi><mi>&gamma;
+ * </mi></msubsup>
+ * </math>.
+ * 
+ * This documentation should be viewed using Firefox version 33.1.1 or above.
+ * 
  * @author tgreen
  *
  */
@@ -41,7 +48,6 @@ public class MsubsupStartNode extends ParseNode {
 
 	/**
 	 * Constructs the node.
-	 * @param _parseValue The parsed token.
 	 * @param _next The next node in the list.
 	 */
 	public MsubsupStartNode(ParseNode _next) {
@@ -49,6 +55,15 @@ public class MsubsupStartNode extends ParseNode {
 	}
 	
 	
+	/**
+	 * Applies the parsing of an subscript-superscript production.
+	 * @param script The parsed script production.
+	 * @param subscript The parsed subscript production.
+	 * @param superscript The parsed superscript production.
+	 * @param endNode The end terminal of the production.
+	 * @param ds The Drools session.
+	 * @return The rendering node for the parsed production.
+	 */
 	public MsubsupRendNode applyParse( ParseRendNode script , ParseRendNode subscript , ParseRendNode superscript , ParseNode endNode , DroolsSession ds )
 	{
 		MsubsupRendNode r = new MsubsupRendNode( script , subscript , superscript );

@@ -48,13 +48,24 @@ import simplealgebra.symbolic.DroolsSession;
 public abstract class ParseRendNode extends ParseNode {
 	
 	
+	/**
+	 * The connection rectangle.
+	 */
 	Rectangle2D.Double connRect;
 	
-	
+	/**
+	 * The image rectangle.
+	 */
 	Rectangle2D.Double imgRect;
 	
+	/**
+	 * The X-Axis offset for rendering.
+	 */
 	double xOffset = 0.0;
 	
+	/**
+	 * The Y-Axis offset for rendering.
+	 */
 	double yOffset = 0.0;
 
 	
@@ -123,7 +134,11 @@ public abstract class ParseRendNode extends ParseNode {
 	
 	
 
-
+	/**
+	 * Builds a connection rectangle from a list of rendering nodes.
+	 * @param lst The list of rendering nodes.
+	 * @return The generated connection rectangle.
+	 */
 	protected Rectangle2D.Double buildConnRect( ArrayList<ParseRendNode> lst )
 
 		{
@@ -155,6 +170,11 @@ public abstract class ParseRendNode extends ParseNode {
 		}
 
 
+	/**
+	 * Builds an image rectangle from a list of rendering nodes.
+	 * @param lst The list of rendering nodes.
+	 * @return The generated image rectangle.
+	 */
 	protected Rectangle2D.Double buildImgRect( ArrayList<ParseRendNode> lst )
 
 		{
@@ -187,6 +207,12 @@ public abstract class ParseRendNode extends ParseNode {
 	
 	
 	
+	/**
+	 * Returns a smaller version of a font.
+	 * @param inFont The font to be shrunk.
+	 * @param nSize The desired font size.
+	 * @return The smaller version of the font.
+	 */
 	protected Font smlFont( Font inFont , java.lang.Double nSize )	
 	{
 		int sz = Math.round( nSize.floatValue() );
@@ -198,6 +224,10 @@ public abstract class ParseRendNode extends ParseNode {
 	
 	
 	
+	/**
+	 * Returns a simple lexeme with no extent.
+	 * @return A simple lexeme with no extent.
+	 */
 	protected static ParseRendNode simpLexeme()
 	{
 		return( new ParseRendNode( null )
@@ -250,28 +280,28 @@ public abstract class ParseRendNode extends ParseNode {
 		underscriptLex.calcRects(sFont, altFontSize, tempFrc);
 		
 
-		double ScriptXOff = 0;
-		double ScriptYOff = 0;
-		double UnderscriptXOff = 0;
-		double UnderscriptYOff = 0;
-		double OverscriptXOff = 0;
-		double OverscriptYOff = 0;
-		double SuperscriptXOff = 0;
-		double SuperscriptYOff = 0;
-		double SubscriptXOff = 0;
-		double SubscriptYOff = 0;
+		double scriptXOff = 0;
+		double scriptYOff = 0;
+		double underscriptXOff = 0;
+		double underscriptYOff = 0;
+		double overscriptXOff = 0;
+		double overscriptYOff = 0;
+		double superscriptXOff = 0;
+		double superscriptYOff = 0;
+		double subscriptXOff = 0;
+		double subscriptYOff = 0;
 
 		double minOverYDelta = leading;
 		/* minOverYDelta = 1; */
 
-		OverscriptYOff = scriptLex.getConnRect().y - minOverYDelta - 
+		overscriptYOff = scriptLex.getConnRect().y - minOverYDelta - 
 			( overscriptLex.getConnRect().height + overscriptLex.getConnRect().y );
 
 
 		minOverYDelta = leading;
 		/* minOverYDelta = 1; */
 
-		SuperscriptYOff = OverscriptYOff + overscriptLex.getConnRect().y - minOverYDelta - 
+		superscriptYOff = overscriptYOff + overscriptLex.getConnRect().y - minOverYDelta - 
 			( superscriptLex.getConnRect().height + superscriptLex.getConnRect().y );
 
 
@@ -279,48 +309,48 @@ public abstract class ParseRendNode extends ParseNode {
 		double minUnderYDelta = leading;
 		/* minUnderYDelta = 1; */
 
-		UnderscriptYOff = minUnderYDelta - underscriptLex.getConnRect().y +
+		underscriptYOff = minUnderYDelta - underscriptLex.getConnRect().y +
 			( scriptLex.getConnRect().height + scriptLex.getConnRect().y );
 
 		minUnderYDelta = leading;
 		/* minUnderYDelta = 1; */
 
-		SubscriptYOff = UnderscriptYOff + minUnderYDelta - subscriptLex.getConnRect().y +
+		subscriptYOff = underscriptYOff + minUnderYDelta - subscriptLex.getConnRect().y +
 			( underscriptLex.getConnRect().height + underscriptLex.getConnRect().y );
 
-		double ScriptCWidth = ( scriptLex.getConnRect().width + scriptLex.getConnRect().x ) / 2;
-		double OverscriptCWidth = ( overscriptLex.getConnRect().width + overscriptLex.getConnRect().x ) / 2;
-		double UnderscriptCWidth = ( underscriptLex.getConnRect().width + underscriptLex.getConnRect().x ) / 2;
+		double scriptCWidth = ( scriptLex.getConnRect().width + scriptLex.getConnRect().x ) / 2;
+		double overscriptCWidth = ( overscriptLex.getConnRect().width + overscriptLex.getConnRect().x ) / 2;
+		double underscriptCWidth = ( underscriptLex.getConnRect().width + underscriptLex.getConnRect().x ) / 2;
 
-		double MaxCWidth = ScriptCWidth;
-		if( OverscriptCWidth > MaxCWidth ) MaxCWidth = OverscriptCWidth;
-		if( UnderscriptCWidth > MaxCWidth ) MaxCWidth = UnderscriptCWidth;
+		double maxCWidth = scriptCWidth;
+		if( overscriptCWidth > maxCWidth ) maxCWidth = overscriptCWidth;
+		if( underscriptCWidth > maxCWidth ) maxCWidth = underscriptCWidth;
 
-		ScriptXOff = MaxCWidth - ScriptCWidth;
-		OverscriptXOff = MaxCWidth - OverscriptCWidth;
-		UnderscriptXOff = MaxCWidth - UnderscriptCWidth;
+		scriptXOff = maxCWidth - scriptCWidth;
+		overscriptXOff = maxCWidth - overscriptCWidth;
+		underscriptXOff = maxCWidth - underscriptCWidth;
 
-		double ScriptXMax = scriptLex.getConnRect().width + ScriptXOff;
-		double OverscriptXMax = overscriptLex.getConnRect().width + OverscriptXOff;
-		double UnderscriptXMax = underscriptLex.getConnRect().width + UnderscriptXOff;
+		double scriptXMax = scriptLex.getConnRect().width + scriptXOff;
+		double overscriptXMax = overscriptLex.getConnRect().width + overscriptXOff;
+		double underscriptXMax = underscriptLex.getConnRect().width + underscriptXOff;
 
-		double MaxXMax = ScriptXMax;
-		if( OverscriptXMax > MaxXMax ) MaxXMax = OverscriptXMax;
-		if( UnderscriptXMax > MaxXMax ) MaxXMax = UnderscriptXMax;
+		double maxXMax = scriptXMax;
+		if( overscriptXMax > maxXMax ) maxXMax = overscriptXMax;
+		if( underscriptXMax > maxXMax ) maxXMax = underscriptXMax;
 
-		SuperscriptXOff = MaxXMax;
-		SubscriptXOff = MaxXMax;
+		superscriptXOff = maxXMax;
+		subscriptXOff = maxXMax;
 
-		scriptLex.setxOffset( ScriptXOff );
-		scriptLex.setyOffset( ScriptYOff );
-		underscriptLex.setxOffset( UnderscriptXOff );
-		underscriptLex.setyOffset( UnderscriptYOff );
-		overscriptLex.setxOffset( OverscriptXOff );
-		overscriptLex.setyOffset( OverscriptYOff );
-		superscriptLex.setxOffset( SuperscriptXOff );
-		superscriptLex.setyOffset( SuperscriptYOff );
-		subscriptLex.setxOffset( SubscriptXOff );
-		subscriptLex.setyOffset( SubscriptYOff );
+		scriptLex.setxOffset( scriptXOff );
+		scriptLex.setyOffset( scriptYOff );
+		underscriptLex.setxOffset( underscriptXOff );
+		underscriptLex.setyOffset( underscriptYOff );
+		overscriptLex.setxOffset( overscriptXOff );
+		overscriptLex.setyOffset( overscriptYOff );
+		superscriptLex.setxOffset( superscriptXOff );
+		superscriptLex.setyOffset( superscriptYOff );
+		subscriptLex.setxOffset( subscriptXOff );
+		subscriptLex.setyOffset( subscriptYOff );
 					
 		ArrayList<ParseRendNode> ar = new ArrayList<ParseRendNode>();
 		ar.add( scriptLex );

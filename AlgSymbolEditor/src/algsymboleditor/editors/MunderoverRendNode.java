@@ -38,7 +38,14 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating a renderable version of an underscript-overscript production.
+ * Node indicating a renderable version of an underscript-overscript production,
+ * producing an expression of the form <math display="inline">
+ * <munderover><mi>&alpha;</mi><mi>&beta;</mi><mi>&gamma;
+ * </mi></munderover>
+ * </math>.
+ * 
+ * This documentation should be viewed using Firefox version 33.1.1 or above.
+ * 
  * @author tgreen
  *
  */
