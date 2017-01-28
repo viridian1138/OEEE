@@ -90,42 +90,48 @@ public abstract class ParseRendNode extends ParseNode {
 
 	
 	/**
-	 * @return the connRect
+	 * Gets the connection rectangle.
+	 * @return The connection rectangle.
 	 */
 	public Rectangle2D.Double getConnRect() {
 		return connRect;
 	}
 
 	/**
-	 * @return the imgRect
+	 * Gets the image rectangle.
+	 * @return The image rectangle.
 	 */
 	public Rectangle2D.Double getImgRect() {
 		return imgRect;
 	}
 
 	/**
-	 * @return the xOffset
+	 * Gets the X-Axis offset.
+	 * @return The X-Axis offset.
 	 */
 	public double getxOffset() {
 		return xOffset;
 	}
 
 	/**
-	 * @param xOffset the xOffset to set
+	 * Sets the X-Axis offset.
+	 * @param xOffset The X-Axis offset.
 	 */
 	public void setxOffset(double xOffset) {
 		this.xOffset = xOffset;
 	}
 
 	/**
-	 * @return the yOffset
+	 * Gets the Y-Axis offset.
+	 * @return The Y-Axis offset.
 	 */
 	public double getyOffset() {
 		return yOffset;
 	}
 
 	/**
-	 * @param yOffset the yOffset to set
+	 * Sets the Y-Axis offset.
+	 * @param yOffset The Y-Axis offset.
 	 */
 	public void setyOffset(double yOffset) {
 		this.yOffset = yOffset;
@@ -254,7 +260,18 @@ public abstract class ParseRendNode extends ParseNode {
 	
 	
 	
-	
+	/**
+	 * Handles the parsing of a normal script symbol.
+	 * @param scriptLex The parsed script production, or null.
+	 * @param superscriptLex The parsed superscript production, or null.
+	 * @param subscriptLex The parsed subscript production, or null.
+	 * @param overscriptLex The parsed overscript produuction, or null.
+	 * @param underscriptLex The parsed underscript production, or null.
+	 * @param inFont The original input font.
+	 * @param origFontSz The original input font size.
+	 * @param altFontSize The font size for nested scripts such as superscript.
+	 * @param tempFrc Rendering context used to calculate font metrics.
+	 */
 	protected void handleCharParse( ParseRendNode scriptLex , ParseRendNode superscriptLex , ParseRendNode subscriptLex ,
 			ParseRendNode overscriptLex , ParseRendNode underscriptLex , 
 			Font inFont , java.lang.Double origFontSz, java.lang.Double altFontSize , final FontRenderContext tempFrc )

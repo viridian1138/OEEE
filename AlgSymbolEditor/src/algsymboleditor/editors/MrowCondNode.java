@@ -35,17 +35,19 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating the end of a MathML mrow.
+ * Node for aggregating the productions in a MathML mrow.
  * @author tgreen
  *
  */
 public class MrowCondNode extends ParseNode {
 	
+	/**
+	 * The list of renderable parsed productions collected so far.
+	 */
 	protected ArrayList<ParseRendNode> lst;
 
 	/**
 	 * Constructs the node.
-	 * @param _parseValue The parsed token.
 	 * @param _next The next node in the list.
 	 */
 	public MrowCondNode(ParseNode _next) {
@@ -54,12 +56,23 @@ public class MrowCondNode extends ParseNode {
 	}
 	
 	
+	/**
+	 * Constructs the node.
+	 * @param _lst The list of renderable parsed productions collected so far.
+	 * @param _next The next node in the parsing list.
+	 */
 	public MrowCondNode(  ArrayList<ParseRendNode> _lst, ParseNode _next) {
 		super(_next);
 		lst = _lst;
 	}
 	
 	
+	/**
+	 * Aggregates one parsed production in the mrow.
+	 * @param node The parsed production.
+	 * @param ds The Drools session.
+	 * @return The result of the aggregation.
+	 */
 	public MrowCondNode applyParseRend( ParseRendNode node , DroolsSession ds )
 	{
 		ArrayList<ParseRendNode> ilst = new ArrayList<ParseRendNode>( lst );
@@ -71,6 +84,12 @@ public class MrowCondNode extends ParseNode {
 	}
 	
 	
+	/**
+	 * Applies the parsing of the end of the mrow.
+	 * @param node Node indicating the end of the mrow.
+	 * @param ds The Drools session.
+	 * @return The final renderable parsed production.
+	 */
 	public MrowRendNode applyMrowEnd( MrowEndNode node , DroolsSession ds )
 	{
 		MrowRendNode r = new MrowRendNode( lst , node.next );

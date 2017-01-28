@@ -52,6 +52,10 @@ public class QuotientEditorContributor extends MultiPageEditorActionBarContribut
 	
 	private Action overscriptAction;
 	private Action underscriptAction;
+	
+	/**
+	 * Action to dump the current expression to the console.
+	 */
 	private Action dumpTextToConsoleAction;
 	
 	private Action overarchInsertDefaultAction;
@@ -60,12 +64,36 @@ public class QuotientEditorContributor extends MultiPageEditorActionBarContribut
 	private Action overarchInsertOperatorAction;
 	private Action overarchInsertNumberAction;
 	
+	/**
+	 * Action for inserting a plus "+" symbol.
+	 */
 	private Action plusAction;
+	
+	/**
+	 * Action for inserting a minus "-" symbol.
+	 */
 	private Action minusAction;
+	
+	/**
+	 * Action for inserting a cross-product or multiplication symbol.
+	 */
 	private Action crossProductOrTimesAction;
+	
+	/**
+	 * Action for inserting a dot-product symbol.
+	 */
 	private Action dotProductAction;
+	
+	/**
+	 * Action for inserting a wedge-product symbol.
+	 */
 	private Action wedgeProductAction;
+	
+	/**
+	 * Action for inserting a partial derivative symbol.
+	 */
 	private Action partialDerivativeAction;
+	
 	private Action delOperatorAction;
 	private Action greaterThanAction;
 	private Action lessThanAction;

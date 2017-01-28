@@ -47,10 +47,17 @@ import simplealgebra.symbolic.DroolsSession;
  */
 public class MrowRendNode extends ParseRendNode {
 	
-	
+	/**
+	 * The list of parsed productions in the row.
+	 */
 	protected ArrayList<ParseRendNode> lst;
 
 	
+	/**
+	 * Constructs the node.
+	 * @param _lst The list of parsed productions in the row.
+	 * @param _next The next node in the parsing list.
+	 */
 	public MrowRendNode(  ArrayList<ParseRendNode> _lst, ParseNode _next) {
 		super(_next);
 		lst = _lst;

@@ -33,7 +33,7 @@ import simplealgebra.symbolic.DroolsSession;
 
 
 /**
- * Node indicating the end of a MathML mrow.
+ * Node indicating the start of a MathML mrow.
  * @author tgreen
  *
  */
@@ -56,7 +56,11 @@ public class MrowStartNode extends ParseNode {
 		return( p0 );
 	}
 	
-	
+	/**
+	 * Applies the parsing of the mrow start.
+	 * @param ds The Drools session.
+	 * @return Parsing node for aggregating the productions in the row.
+	 */
 	public MrowCondNode applyMrowStart( DroolsSession ds )
 	{
 		MrowCondNode r = new MrowCondNode( next );

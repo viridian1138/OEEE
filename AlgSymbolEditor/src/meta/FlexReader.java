@@ -74,9 +74,21 @@ import java.io.Reader;
  * @author Thorn Green
  */
 public class FlexReader extends Reader {
+	
+	/**
+	 * The current point from which to read.
+	 */
     private int currentPoint = 0;
+    
+    /**
+     * The string from which to read.
+     */
     private FlexString myf = null;
     
+    /**
+     * Constructs the reader.
+     * @param in The string from which to read.
+     */
     public FlexReader(FlexString in) {
         myf = in;
     }
