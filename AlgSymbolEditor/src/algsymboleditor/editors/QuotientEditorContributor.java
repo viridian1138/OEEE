@@ -234,30 +234,124 @@ public class QuotientEditorContributor extends MultiPageEditorActionBarContribut
 	
 	
 	
-	
+	/**
+	 * Action for inserting a Greek lowercase Alpha.
+	 */
 	private Action lAlphaAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Beta.
+	 */
 	private Action lBetaAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Gamma.
+	 */
 	private Action lGammaAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Delta.
+	 */
 	private Action  lDeltaAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Epsilon.
+	 */
 	private Action  lEpsilonAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Zeta.
+	 */
 	private Action  lZetaAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Eta.
+	 */
 	private Action  lEtaAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Theta.
+	 */
 	private Action  lThetaAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Iota.
+	 */
 	private Action  lIotaAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Kappa.
+	 */
 	private Action  lKappaAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Lambda.
+	 */
 	private Action  lLambdaAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Mu.
+	 */
 	private Action  lMuAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Nu.
+	 */
 	private Action  lNuAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Xi.
+	 */
 	private Action  lXiAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Omicron.
+	 */
 	private Action  lOmicronAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Pi.
+	 */
 	private Action  lPiAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Rho.
+	 */
 	private Action  lRhoAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Sigma.
+	 */
 	private Action  lSigmaAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Tau.
+	 */
 	private Action  lTauAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Upsilon.
+	 */
 	private Action  lUpsilonAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Phi.
+	 */
 	private Action  lPhiAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Chi.
+	 */
 	private Action  lChiAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Psi.
+	 */
 	private Action  lPsiAction;
+	
+	/**
+	 * Action for inserting a Greek lowercase Omega.
+	 */
 	private Action  lOmegaAction;
 	
 	
