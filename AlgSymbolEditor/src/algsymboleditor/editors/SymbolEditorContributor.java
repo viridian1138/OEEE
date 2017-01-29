@@ -97,33 +97,141 @@ public class SymbolEditorContributor extends MultiPageEditorActionBarContributor
 	 */
 	private Action partialDerivativeAction;
 	
+	/**
+	 * Action for inserting a <math display="inline">
+     * <mo>&nabla;</mo>
+     * </math> operator symbol for directional derivatives.
+	 */
 	private Action delOperatorAction;
+	
+	/**
+	 * Action for inserting a greater-than symbol.
+	 */
 	private Action greaterThanAction;
+	
+	/**
+	 * Action for inserting a less-than symbol.
+	 */
 	private Action lessThanAction;
 	
+	/**
+	 * Action for inserting a Greek uppercase Alpha.
+	 */
 	private Action uAlphaAction;
+	
+	/**
+	 * Action for inserting a Greek uppercase Beta.
+	 */
 	private Action uBetaAction;
+	
+	/**
+	 * Action for inserting a Greek uppercase Gamma.
+	 */
 	private Action uGammaAction;
+	
+	/**
+	 * Action for inserting a Greek uppercase Delta.
+	 */
 	private Action  uDeltaAction;
+	
+	/**
+	 * Action for inserting a Greek uppercase Epsilon.
+	 */
 	private Action  uEpsilonAction;
+	
+	/**
+	 * Action for inserting a Greek uppercase Zeta.
+	 */
 	private Action  uZetaAction;
+	
+	/**
+	 * Action for inserting a Greek uppercase Eta.
+	 */
 	private Action  uEtaAction;
+	
+	/**
+	 * Action for inserting a Greek uppercase Theta.
+	 */
 	private Action  uThetaAction;
+	
+	/**
+	 * Action for inserting a Greek uppercase Iota.
+	 */
 	private Action  uIotaAction;
+	
+	/**
+	 * Action for inserting a Greek uppercase Kappa.
+	 */
 	private Action  uKappaAction;
+	
+	/**
+	 * Action for inserting a Greek uppercase Lambda.
+	 */
 	private Action  uLambdaAction;
+	
+	/**
+	 * Action for inserting a Greek uppercase Mu.
+	 */
 	private Action  uMuAction;
+	
+	/**
+	 * Action for inserting a Greek uppercase Nu.
+	 */
 	private Action  uNuAction;
+	
+	/**
+	 * Action for inserting a Greek uppercase Xi.
+	 */
 	private Action  uXiAction;
+	
+	/**
+	 * Action for inserting a Greek uppercase Omicron.
+	 */
 	private Action  uOmicronAction;
+	
+	/**
+	 * Action for unserting an uppercase Greek Pi.
+	 */
 	private Action  uPiAction;
+	
+	/**
+	 * Action for inserting an uppercase Greek Rho.
+	 */
 	private Action  uRhoAction;
+	
+	/**
+	 * Action for inserting an uppercase Greek Sigma.
+	 */
 	private Action  uSigmaAction;
+	
+	/**
+	 * Action for inserting an uppercase Greek Tau.
+	 */
 	private Action  uTauAction;
+	
+	/**
+	 * Action for inserting an uppercase Greek Upsilon.
+	 */
 	private Action  uUpsilonAction;
+	
+	/**
+	 * Action for inserting an uppercase Greek Phi.
+	 */
 	private Action  uPhiAction;
+	
+	/**
+	 * Action for inserting an uppercase Greek Chi.
+	 */
 	private Action  uChiAction;
+	
+	/**
+	 * Action for inserting an uppercase Greek Psi.
+	 */
 	private Action  uPsiAction;
+	
+	/**
+	 * Action for inserting an uppercase Greek Omega.
+	 */
 	private Action  uOmegaAction;
 	
 	
